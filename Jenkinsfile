@@ -1,7 +1,7 @@
 pipeline {
   agent none 
   stages {
-    stage('Build') {
+    stage('Checkout, Test & Build') {
         agent {
           docker {
             image 'node:10-alpine'
@@ -42,10 +42,6 @@ pipeline {
         skipDefaultCheckout()
       }
       steps {
-        sh 'pwd'
-        sh 'ls'
-        sh 'ls /home'
-        sh 'ls /var'
         sh 'rm -rf /var/www/test-project'
         sh 'mkdir /var/www/test-project'
         sh 'cp -Rp build/** /var/www/test-project'
