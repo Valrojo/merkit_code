@@ -32,7 +32,9 @@ pipeline {
     }
 
     stage('Deploy') {
-      agent any
+      agent {
+          label 'master'
+      }
       steps {
         sh 'ls'
         sh 'rm -rf /var/www/test-project'
