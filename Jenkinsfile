@@ -33,7 +33,7 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        archiveArtifacts 'build/**'
+        sh './jenkins/scripts/deploy.sh'
       }
     }
 
