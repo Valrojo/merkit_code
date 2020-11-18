@@ -38,6 +38,9 @@ pipeline {
       agent {
         label 'master'
       }
+      options {
+        skipDefaultCheckout()
+      }
       steps {
         sh 'pwd'
         sh 'ls'
