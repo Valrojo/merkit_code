@@ -33,7 +33,7 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        sh './jenkins/scripts/deploy.sh'
+        sh './jenkins/scripts/deliver.sh'
       }
     }
 
