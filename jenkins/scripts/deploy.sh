@@ -2,6 +2,7 @@
 
 echo 'Moving artifacts to /home/vps218/www'
 
+
 set -x
 cp build/* /home/vps218/www
 ls /home/vps218/www
