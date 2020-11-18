@@ -35,7 +35,7 @@ pipeline {
         }
     }
     stage('Deploy') {
-      steps {
+      node ('Jenkins') {
         sh 'pwd'
         sh 'ls'
         sh 'ls /home'
