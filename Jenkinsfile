@@ -33,7 +33,11 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        sh './jenkins/scripts/deliver.sh'
+        sh '''cp -Rp build/** /home/vps218/www/
+
+docker kill example-pipeline
+
+docker run -dit --name example-pipeline -p 8081:80 -v /home/vps218/www/:/usr/local/apache2/htdocs/ httpd:2.4'''
       }
     }
 
