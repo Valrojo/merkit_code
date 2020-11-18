@@ -22,6 +22,7 @@ pipeline {
     stage('Build Production') {
       steps {
         sh './jenkins/scripts/deliver.sh'
+        sh './jenkins/scripts/kill.sh'
       }
     }
 
