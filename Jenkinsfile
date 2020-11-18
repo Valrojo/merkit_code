@@ -7,7 +7,7 @@ pipeline {
 
   }
   stages {
-    stage('Build') {
+    stage('Install') {
       steps {
         sh 'npm install'
       }
@@ -19,13 +19,19 @@ pipeline {
       }
     }
 
-    stage('Build Production') {
+    stage('Build') {
       steps {
-        sh './jenkins/scripts/deliver.sh'
+        sh './jenkins/scripts/build.sh'
       }
     }
 
     stage('Archive') {
+      steps {
+        archiveArtifacts 'build/**'
+      }
+    }
+
+    stage('Deploy') {
       steps {
         archiveArtifacts 'build/**'
       }
