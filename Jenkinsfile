@@ -25,6 +25,12 @@ pipeline {
       }
     }
 
+    stage('Archive') {
+      steps {
+        archiveArtifacts 'build/**'
+      }
+    }
+
   }
   environment {
     HOME = '.'
