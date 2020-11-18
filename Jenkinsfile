@@ -41,7 +41,8 @@ pipeline {
       success {
         sh 'pwd'
         sh 'ls'
-        sh 'ls'
+        sh 'ls /home'
+        sh 'ls /var'
         sh 'rm -rf /var/www/test-project'
         sh 'mkdir /var/www/test-project'
         sh 'cp -Rp build/** /var/www/test-project'
