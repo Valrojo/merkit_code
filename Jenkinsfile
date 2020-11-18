@@ -32,6 +32,7 @@ pipeline {
     }
 
     stage('Deploy') {
+      agent any
       steps {
         pwd()
         sh '''docker kill test-project
