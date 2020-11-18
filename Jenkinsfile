@@ -33,13 +33,8 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        sh '''rm -rf /var/www/test-project
-
-mkdir /var/www/test-project
-
-cp -Rp build/** /var/www/test-project
-
-docker kill test-project
+        pwd()
+        sh '''docker kill test-project
 
 docker run -dit --name test-project -p 8081:80 -v /var/www/test-project/:/usr/local/apache2/htdocs/ httpd:2.4'''
       }
