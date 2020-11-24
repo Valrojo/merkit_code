@@ -42,11 +42,11 @@ pipeline {
         skipDefaultCheckout()
       }
       steps {
-        sh 'rm -rf /var/www/test-project'
-        sh 'mkdir /var/www/test-project'
-        sh 'cp -Rp build/** /var/www/test-project'
-        sh 'docker stop test-project || true && docker rm test-project || true'
-        sh 'docker run -dit --name test-project -p 8001:80 -v /var/www/test-project/:/usr/local/apache2/htdocs/ httpd:2.4'
+        sh 'rm -rf /var/www/merkit'
+        sh 'mkdir /var/www/merkit'
+        sh 'cp -Rp build/** /var/www/merkit'
+        sh 'docker stop merkit || true && docker rm merkit || true'
+        sh 'docker run -dit --name merkit -p 8007:80 -v /var/www/merkit/:/usr/local/apache2/htdocs/ httpd:2.4'
       }
     }
   }
