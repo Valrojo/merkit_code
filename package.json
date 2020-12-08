@@ -5,6 +5,8 @@
   "dependencies": {
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
+    "react-icons": "^4.1.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "^2.1.8",
     "typescript": "^3.3.4000"
   },

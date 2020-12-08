@@ -14,7 +14,7 @@ pipeline {
         stages {
           stage('Install') {
             steps {
-              sh 'npm install'
+              sh 'npm install && npm install --save react-router-dom'
             }
           }
           stage('Test') {
