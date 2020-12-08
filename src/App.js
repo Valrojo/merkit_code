@@ -1,30 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import BarraLateral from './componentes/BarraLateral';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Merkit code 10/10 docker</h1>
-        </header>
-        <p className="App-intro">
-          INFO 282
-        </p>
+import Ventas from './paginas/Ventas';
+import Inventario from './paginas/Inventario';
+import Resumen from './paginas/Resumen';
+import Calculadora from './paginas/Calculadora';
+
+function App() {
 
 
-        {/* uwu */
-        <button className="btn btn-primary">
-          clikc aqui para un ifone
-        </button>
-        /* */}
+  return (
+    <>
+    <Router>
 
+      <BarraLateral />
+      <Switch>
+        <Route path = '/' exact component={Ventas}/>
+        <Route path = '/inventario' component={Inventario}/>
+        <Route path = '/resumen' component={Resumen}/>
+        <Route path = '/calculadora' component={Calculadora}/>
+      </Switch>
+    </Router>
+    </>
 
-      </div>
-    );
-  }
+  );
+  
 }
 
 export default App;
