@@ -1,0 +1,50 @@
+CREATE USER merkit-user WHITH PASSWORD "123456";
+
+CREATE DATABASE merkit_db;
+
+CREATE TYPE type_unidad AS ENUM ('unidad', 'kg', 'gr');
+
+CREATE TABLE producto
+(
+ID_Producto serial,
+Nombre varchar(20),
+Descripcion varchar(20),
+Marca varchar(20),
+Stock DOUBLE PRECISION,
+Codigo varchar(20),
+Unidad type_unidad,
+Precio int,
+Foto varchar(20),
+PRIMARY KEY(ID_Producto)
+);
+
+CREATE TABLE log_inventario
+(
+ID serial,
+Fecha date,
+ID_Producto int,
+diferenciaStock DOUBLE PRECISION,
+Tipo type_unidad,
+Detalle varchar(100),
+PRIMARY KEY(ID),
+CONSTRAINT fk_productos FOREIGN KEY(ID_Producto) REFERENCES producto(ID_Producto)
+);
+
+CREATE TABLE venta
+(
+ID_Venta serial,
+Fecha date,
+PRIMARY KEY(ID_Venta)
+);
+
+create table item_venta
+(
+ID_Venta int,
+ID_Producto int,
+Unidad type_unidad,
+Cantidad DOUBLE PRECISION,
+Precio int,
+PRIMARY KEY(ID_Venta,ID_Producto),
+CONSTRAINT fk_venta FOREIGN KEY(ID_Venta) REFERENCES venta(ID_Venta),
+CONSTRAINT fk_producto FOREIGN KEY(ID_Producto) REFERENCES producto(ID_Producto)
+);
