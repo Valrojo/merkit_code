@@ -1,9 +1,9 @@
-.barraLateral {
+.barraSup {
     background-color:  #e4f1e9; /*o un hexa*/
-    height: 100px;
+    height: 20px;
     display: flex;
-    justify-content: start;
-    align-items: center;
+    /* justify-content: start;
+    align-items: center; */
 
     /*border-width: 1px;
     border-color:rgb(57, 71, 66);
@@ -13,11 +13,11 @@
     border-width: 5px;*/
 }
 
-.barras-menu{
+/* .barras-menu{
     margin-left: 2rem;
     font-size: 2rem;
     background: none;
-}
+} */
 
 .nav-menu{
     background-color: #e4f1e9;
@@ -25,24 +25,26 @@
     /*border-color: rgb(57, 71, 66);
     border-style: solid;*/
 
-    width: 250px;
-    height: 100vh;
-    display: flex;
+    /* min-width: 190px;
+    max-width: 190px; */
+    width: 100%;
+    height: 100%;
+    /* display: flex; */
     justify-content: center;
-    position: fixed;
-    top: 1;
+    /* position: fixed; */
+    /* top: 1; */
     /*left: -100%;*/
     transition: 850ms;
 }
 
 .texto-nav {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     /*justify-content: start;*/
     align-items: center;
     padding: 8px 0px 8px 16px;
-    list-style: none;
-    height: 90px;
+    /* list-style: none; */
+    height: 60px;
 }
 
 .texto-nav a {
@@ -54,7 +56,7 @@
     
     width: 100%;
     height: 100%;
-    display: flex;
+    /* display: flex; */
     align-items: center;
     padding: 0 16px;
     /*border-radius: 4px;*/

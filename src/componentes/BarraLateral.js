@@ -9,18 +9,10 @@ import './BarraLateral.css';
 import { IconContext } from 'react-icons'
 
 function BarraLateral() {
-    const [barra, setBarra] = useState(false)
-
-    const muestraBarra = () => setBarra(!barra)
 
     return (
-        <>
         <IconContext.Provider value = {{color: '#324237'}}> 
-                  
-            <div className = 'barraLateral' />
-
-
-            <nav className = {barra ? 'nav-menu active' : 'nav-menu'}>
+            <nav className = 'nav-menu active'>
                 <ul className = 'nav-menu-items'>
                     {DatosBarra.map((item, index) => {
                         return (
@@ -35,8 +27,7 @@ function BarraLateral() {
                 </ul>
             </nav>
         </IconContext.Provider>
-        </>
-    )
+    );
 }
 
-export default BarraLateral
+export default BarraLateral;

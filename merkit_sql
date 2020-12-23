@@ -1,5 +1,3 @@
-CREATE USER merkit-user WHITH PASSWORD "123456";
-
 CREATE DATABASE merkit_db;
 
 CREATE TYPE type_unidad AS ENUM ('unidad', 'kg', 'gr');
