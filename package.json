@@ -7,8 +7,9 @@
     "react-dom": "^16.8.5",
     "react-icons": "^4.1.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^2.1.8",
-    "typescript": "^3.3.4000"
+    "react-scripts": "^4.0.1",
+    "typescript": "^3.3.4000",
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "start": "react-scripts start",
