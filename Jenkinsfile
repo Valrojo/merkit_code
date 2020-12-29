@@ -12,6 +12,7 @@ pipeline {
           stage('Install') {
             steps {
               sh 'yarn install'
+              sh 'apt install docker-compose'
             }
           }
           stage('Test') {

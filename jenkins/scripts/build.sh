@@ -6,5 +6,5 @@ echo '"/var/jenkins_home/workspace/merkit-react-app" directory),'
 echo 'correctly bundles React in production mode and optimizes the build for'
 echo 'the best performance.'
 set -x
-npm run build
+yarn build
 set +x
