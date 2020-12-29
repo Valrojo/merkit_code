@@ -18,4 +18,4 @@ echo 'application renders satisfactorily. This command actually invokes the test
 echo 'runner Jest (https://facebook.github.io/jest/).'
 set -x
 #yarn test
-yarn audit | tail -n 2
+npm audit | tail -n 2
