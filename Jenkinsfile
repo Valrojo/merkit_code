@@ -3,10 +3,7 @@ pipeline {
   stages {
     stage('Checkout, Test & Build') {
         agent {
-          docker {
-            image 'node:latest'
-            args '-p 3001:3000'
-          }
+          label 'master'
         }
         environment {
           HOME = '.'
