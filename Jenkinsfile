@@ -11,7 +11,6 @@ pipeline {
         stages {
           stage('Install') {
             steps {
-              sh 'apt --only-upgrade install docker-compose'
               sh 'npm install'
             }
           }
