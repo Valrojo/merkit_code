@@ -5,7 +5,8 @@ function Inventario() {
         <div className = 'inventario'>
 
             <h1>Inventario</h1>
-        
+            
+
         </div>
     )
 }
