@@ -19,3 +19,4 @@ echo 'runner Jest (https://facebook.github.io/jest/).'
 set -x
 #yarn test
 #yarn audit | tail -n 2
+set +x
