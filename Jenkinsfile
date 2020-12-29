@@ -2,12 +2,6 @@ pipeline {
   agent none 
   stages {
     stage('Checkout, Test & Build') {
-        agent {
-          docker {
-            image 'node:10-alpine'
-            args '-p 3001:3000'
-          }
-        }
         environment {
           HOME = '.'
         }
@@ -43,11 +37,8 @@ pipeline {
       }
       steps {
         sh 'rm -rf /var/www/merkit'
-        sh 'mkdir /var/www/merkit'
-        sh 'ls'
-        sh 'cp -Rp build/** /var/www/merkit'
-        sh 'docker stop merkit || true && docker rm merkit || true'
-        sh 'docker run -dit --name merkit -p 8007:80 -v /var/www/merkit/:/usr/local/apache2/htdocs/ httpd:2.4'
+        sh 'docker-compose down'
+        sh 'docker-compose up --build'
       }
     }
   }

@@ -1,13 +1,32 @@
 version: "3"
 
 services:
-  node_docker_meetup_react_app:
-    image: node:10-alpine
+  merkit_docker_test:
+    depends_on:
+      - node_listener
+    image: httpd:latest
     ports:
-      - "3000:3000"
-    environment:
-      - DEBUG=myapp:*
+      - "8007:80"
     volumes:
-      - ./:/usr/src/app
-    working_dir: /usr/src/app
-    command: /bin/sh -c "yarn install && yarn start"
+      - ./build/:/usr/local/apache2/htdocs/
+
+  node_listener:
+    depends_on:
+      - postgres_bd
+    image: node:latest
+    ports:
+      - "8008:5000"
+    working_dir: /home/node/node_listener
+    volumes:
+      - ./server/:/home/node/node_listener/
+    command: sh -c "npm install && node index"
+
+  postgres_bd:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: testpass
+    volumes:
+      - ./server/bd/:/var/lib/postgresql/data/
+      
+volumes:
+  server:
