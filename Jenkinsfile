@@ -11,8 +11,12 @@ pipeline {
         stages {
           stage('Install') {
             steps {
+              sh 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -'
+              sh 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -'
+              sh 'echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list'
+              sh 'apt install yarn'
+              sh 'apt --only-upgrade install docker-compose'
               sh 'yarn install'
-              sh 'apt-get --only-upgrade install docker-compose'
             }
           }
           stage('Test') {
