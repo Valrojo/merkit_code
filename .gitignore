@@ -2,6 +2,7 @@
 # From user:
 *lock*
 bd
+build/
 # Logs
 
 logs
