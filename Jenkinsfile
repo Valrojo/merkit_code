@@ -49,7 +49,7 @@ pipeline {
       }
       steps {
         sh 'docker-compose down'
-        sh 'docker-compose up --build'
+        sh 'docker-compose up --build --detach'
       }
     }
   }
