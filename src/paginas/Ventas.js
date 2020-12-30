@@ -8,7 +8,7 @@ function Ventas() {
                     console.log("Button!");
                     try {
                         let ans = await fetch(
-                            "http://146.83.216.218:8008/testentry"
+                            "http://146.83.216.218:8006/testentry"
                         );
                         ans = await ans.json();
                         console.log(`Received: ${ans.length}`);

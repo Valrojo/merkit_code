@@ -15,7 +15,7 @@ services:
       - postgres_bd
     image: node:latest
     ports:
-      - "8008:5000"
+      - "8006:5000"
     working_dir: /home/node/node_listener
     volumes:
       - ./server/:/home/node/node_listener/
