@@ -3,7 +3,7 @@ pipeline {
     label 'master'
   } 
   stages {
-    stage('Initial Check'){
+    stage('Docker Check'){
       agent {
         label 'master'
       }
@@ -15,29 +15,33 @@ pipeline {
           steps{
             sh 'pwd'
             sh 'docker ps -a'
+            sh 'docker rm $(docker ps -aq)'
           }
         }
       }
     }
-    stage('Checkout, Test & Build') {
-        agent {
-          docker { image 'node:latest' }
-        }
-        environment {
-          HOME = '.'
-        }
-        stages {
-          stage('Clean'){
-            steps {
-              sh './jenkins/scripts/clean.sh'
-            }
-          }
-          stage('Build') {
-            steps {
-              sh './jenkins/scripts/build.sh'
-            }
+    stage('Clean & Build') {
+      options {
+        skipDefaultCheckout()
+      }
+      agent {
+        docker { image 'node:latest' }
+      }
+      environment {
+        HOME = '.'
+      }
+      stages {
+        stage('Clean'){
+          steps {
+            sh './jenkins/scripts/clean.sh'
           }
         }
+        stage('Build') {
+          steps {
+            sh './jenkins/scripts/build.sh'
+          }
+        }
+      }
     }
     stage('Deploy') {
       agent {

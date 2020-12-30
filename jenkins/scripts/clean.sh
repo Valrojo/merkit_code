@@ -1,5 +1,4 @@
 set +x
-echo 'This script will kill the docker images running.'
+echo 'This script will clean trash files.'
 set -x
 pwd
-docker ps -a
