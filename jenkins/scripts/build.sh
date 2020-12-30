@@ -8,5 +8,4 @@ echo 'the best performance.'
 set -x
 npm install
 npm run build
-mkdir server/bd || true
 set +x

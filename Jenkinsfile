@@ -51,6 +51,7 @@ pipeline {
       }
       steps {
         sh 'docker-compose up --build -d'
+        sh 'docker ps -a'
       }
     }
   }
