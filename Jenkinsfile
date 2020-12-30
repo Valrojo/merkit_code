@@ -14,6 +14,7 @@ pipeline {
             sh 'pwd'
             sh 'ls'
             sh 'ls ../'
+            sh 'ls ../merkit_db/ || true'
             sh 'docker ps -a'
           }
         }

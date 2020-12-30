@@ -1,6 +1,6 @@
 -- Always restart db
 DROP DATABASE IF EXISTS test_db;
-CREATE DATABASE IF NOT EXISTS test_db;
+CREATE DATABASE test_db;
 \c test_db;
 
 CREATE TABLE IF NOT EXISTS test_table (
