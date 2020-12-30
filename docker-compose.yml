@@ -15,7 +15,7 @@ services:
       - postgres_bd
     image: node:latest
     ports:
-      - "8006:5000"
+      - "8008:5000"
     working_dir: /home/node/node_listener
     volumes:
       - ./server/:/home/node/node_listener/
@@ -27,6 +27,8 @@ services:
       POSTGRES_PASSWORD: testpass
     volumes:
       - ./server/bd/:/var/lib/postgresql/data/
-      
+      - ./server/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./server/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
 volumes:
   server:
