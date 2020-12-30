@@ -48,8 +48,7 @@ pipeline {
         skipDefaultCheckout()
       }
       steps {
-        sh 'docker-compose down'
-        sh 'docker-compose up --build --detach'
+        sh 'docker-compose up --build -d'
       }
     }
   }
