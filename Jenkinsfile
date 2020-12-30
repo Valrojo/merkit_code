@@ -17,10 +17,10 @@ pipeline {
             sh 'docker ps -a'
           }
         }
-      }
-      stage('Clean'){
-        steps {
-          sh './jenkins/scripts/clean.sh'
+        stage('Clean'){
+          steps {
+              sh './jenkins/scripts/clean.sh'
+          }
         }
       }
     }
