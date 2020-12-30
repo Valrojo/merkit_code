@@ -14,6 +14,7 @@ pipeline {
         stage("Checking"){
           steps{
             sh 'pwd'
+            sh 'docker ps -a'
           }
         }
       }
