@@ -15,7 +15,10 @@ pipeline {
           steps{
             sh 'pwd'
             sh 'docker ps -a'
-            sh 'docker rm $(docker ps -aq)'
+            sh 'docker rm -f 3e0adc98c4fb'
+            sh 'docker rm -f 47d69d706a88'
+            sh 'docker rm -f 4275ac4bc098'
+            sh 'docker rm -f a9d626e64636'
           }
         }
       }
