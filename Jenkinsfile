@@ -50,7 +50,7 @@ pipeline {
         skipDefaultCheckout()
       }
       steps {
-        sh 'docker-compose up --build -d'
+        sh 'docker-compose up --build'
         sh 'docker ps -a'
       }
     }
