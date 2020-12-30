@@ -9,6 +9,9 @@ pipeline {
           HOME = '.'
         }
         stages {
+          stage('Clean'){
+            sh './jenkins/scripts/clean.sh'
+          }
           stage('Build') {
             steps {
               sh './jenkins/scripts/build.sh'
