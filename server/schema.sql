@@ -1,14 +1,14 @@
--- Always reset db
-DROP DATABASE IF EXISTS test_db;
-CREATE DATABASE test_db;
+CREATE DATABASE IF NOT EXISTS test_db;
 \c test_db;
 
-CREATE TABLE test_table (
+CREATE TABLE IF NOT EXISTS test_table (
   id SERIAL PRIMARY KEY,
   num INTEGER
 );
 
 -- Insert some items
-INSERT INTO test_table VALUES(33);
-INSERT INTO test_table VALUES(42);
-INSERT INTO test_table VALUES(12);
+IF NOT EXISTS (SELECT FROM test_table) THEN
+  INSERT INTO test_table VALUES(33);
+  INSERT INTO test_table VALUES(42);
+  INSERT INTO test_table VALUES(12);
+END IF;
