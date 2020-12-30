@@ -10,7 +10,9 @@ pipeline {
         }
         stages {
           stage('Clean'){
-            sh './jenkins/scripts/clean.sh'
+            steps {
+              sh './jenkins/scripts/clean.sh'
+            }
           }
           stage('Build') {
             steps {
