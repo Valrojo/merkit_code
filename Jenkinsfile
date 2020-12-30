@@ -3,30 +3,15 @@ pipeline {
   stages {
     stage('Checkout, Test & Build') {
         agent {
-          label 'master'
+          docker { image 'node:latest' }
         }
         environment {
           HOME = '.'
         }
         stages {
-          stage('Install') {
-            steps {
-              sh 'npm install'
-            }
-          }
-          stage('Test') {
-            steps {
-              sh './jenkins/scripts/test.sh'
-            }
-          }
           stage('Build') {
             steps {
               sh './jenkins/scripts/build.sh'
-            }
-          }
-          stage('Archive') {
-            steps {
-              archiveArtifacts 'build/**'
             }
           }
         }
