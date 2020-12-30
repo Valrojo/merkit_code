@@ -7,5 +7,6 @@ echo 'correctly bundles React in production mode and optimizes the build for'
 echo 'the best performance.'
 set -x
 npm install
-npm build
+npm run build
+mkdir server/bd || true
 set +x
