@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label 'master'
+    label none
   } 
   stages {
     stage('Docker Check'){
@@ -50,7 +50,6 @@ pipeline {
         skipDefaultCheckout()
       }
       steps {
-        sh 'rm -rf /var/www/merkit'
         sh 'docker-compose down'
         sh 'docker-compose up --build'
       }
