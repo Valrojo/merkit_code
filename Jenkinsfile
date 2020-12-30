@@ -1,6 +1,21 @@
 pipeline {
   agent none 
   stages {
+    stage('Initial Check'){
+      agent {
+        label 'master'
+      }
+      environment {
+        HOME = '.'
+      }
+      stages{
+        stage("Checking"){
+          steps{
+            sh 'pwd'
+          }
+        }
+      }
+    }
     stage('Checkout, Test & Build') {
         agent {
           docker { image 'node:latest' }
