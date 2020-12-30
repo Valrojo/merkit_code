@@ -1,7 +1,7 @@
 pipeline {
   agent none
   stages {
-    stage('Docker Check'){
+    stage('Check & Clean'){
       agent {
         label 'master'
       }
@@ -12,12 +12,19 @@ pipeline {
         stage("Checking"){
           steps{
             sh 'pwd'
+            sh 'ls'
+            sh 'ls ../'
             sh 'docker ps -a'
           }
         }
       }
+      stage('Clean'){
+        steps {
+          sh './jenkins/scripts/clean.sh'
+        }
+      }
     }
-    stage('Clean & Build') {
+    stage('Build') {
       options {
         skipDefaultCheckout()
       }
@@ -27,12 +34,7 @@ pipeline {
       environment {
         HOME = '.'
       }
-      stages {
-        stage('Clean'){
-          steps {
-            sh './jenkins/scripts/clean.sh'
-          }
-        }
+      stages {     
         stage('Build') {
           steps {
             sh './jenkins/scripts/build.sh'
