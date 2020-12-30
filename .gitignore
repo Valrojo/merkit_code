@@ -1,10 +1,11 @@
 .DS_Store
 # From user:
-*lock*
-bd/*
+*lock.json
+*.lock
+server/bd/
 build/
-# Logs
 
+# Logs
 logs
 *.log
 npm-debug.log*
