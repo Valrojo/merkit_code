@@ -1,7 +1,5 @@
 pipeline {
-  agent {
-    label none
-  } 
+  agent none
   stages {
     stage('Docker Check'){
       agent {
