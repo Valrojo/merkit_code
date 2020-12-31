@@ -31,12 +31,8 @@ pipeline {
       environment {
         HOME = '.'
       }
-      stages {     
-        stage('Build') {
-          steps {
-            sh './jenkins/scripts/build.sh'
-          }
-        }
+      steps {
+        sh './jenkins/scripts/build.sh'
       }
     }
     stage('Deploy') {

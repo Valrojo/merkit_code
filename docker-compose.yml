@@ -19,7 +19,7 @@ services:
     working_dir: /home/node/node_listener
     volumes:
       - ./server/:/home/node/node_listener/
-    command: sh -c "npm install && node index"
+    command: sh -c "npm install --force && node index"
 
   postgres_bd:
     image: postgres:latest
