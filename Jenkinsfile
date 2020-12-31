@@ -11,12 +11,7 @@ pipeline {
       stages{
         stage("Checking"){
           steps{
-            sh 'pwd'
-            sh 'ls'
-            sh 'ls ../'
-            sh 'ls ../merkit_dbs/ || true'
-            sh 'mkdir ../merkit_dbs/ || true'
-            sh 'docker ps -a'
+            sh './jenkins/scripts/check.sh'
           }
         }
         stage('Clean'){
