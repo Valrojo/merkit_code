@@ -1,7 +1,7 @@
 .DS_Store
 # From user:
-*lock.json
-*.lock
+# ! Lock files are usefull!
+yarn.lock
 server/bd/
 build/
 
