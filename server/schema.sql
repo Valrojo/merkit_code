@@ -1,12 +1,17 @@
--- Always restart db
-DROP DATABASE IF EXISTS test_db;
-CREATE DATABASE test_db;
-\c test_db;
+CREATE DATABASE merkitdb;
 
-CREATE TABLE IF NOT EXISTS test_table (
-  id SERIAL PRIMARY KEY,
-  num INTEGER
+CREATE TYPE type_unidad AS ENUM ('Kg', 'gr', 'Unidad');
+
+CREATE TABLE productos
+(
+ID_Productos serial,
+Nombre varchar(20),
+Descripcion varchar(20),
+Marca varchar(20),
+Stock DOUBLE PRECISION,
+Codigo varchar(20),
+Unidad type_unidad,
+Precio int,
+Foto varchar(20),
+PRIMARY KEY(ID_Productos)
 );
-
--- Insert some items
-INSERT INTO test_table VALUES (33), (42), (31);

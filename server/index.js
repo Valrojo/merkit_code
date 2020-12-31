@@ -1,41 +1,96 @@
-const express = require("express");
+const express = require("express"); //express es una libreria
 const app = express();
 const cors = require("cors");
-const pool = require("./db");
+const pool = require("./db")
 
-// Middleware
+//middleware
 app.use(cors());
-app.use(express.json()); // req.body
+app.use(express.json()); //req.body
 
-//--Rutas--
+//rutas
 
-// Get all
-app.get("/", async(req, res) => {
-    try{
-        console.log("NORMAL GET from page!");
-        const ans = await pool.query(
-            "SELECT * FROM test_table;"
+// *****************Cambiar tabla productoS por producto*************************
+
+//crear productos
+
+app.post("/productos", async(req,res) => {
+    try {
+        const { nombre, descripcion, marca, stock, codigo, unidad, precio, foto } = req.body;
+
+        const nuevoProducto = await pool.query(
+            "INSERT INTO productos (nombre, descripcion, marca, stock, codigo, unidad, precio, foto) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *", 
+            [nombre, descripcion, marca, stock, codigo, unidad, precio, foto]
         );
-        res.json(ans.rows);
-    }catch(err){
-        console.log(err.message);
+
+        res.json(nuevoProducto.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+
+//get todos los productos
+
+app.get("/productos", async(req,res) => {
+    try {
+        const allProductos = await pool.query("SELECT * FROM productos");
+        res.json(allProductos.rows);
+
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+
+//get un producto
+
+app.get("/productos/:id", async(req,res) => {
+    try {
+        const {id} = req.params;
+        const producto = await pool.query("SELECT * FROM productos WHERE id_productos = $1",[id]);
+        
+        res.json(producto.rows[0]);
+
+    } catch (err) {
+        console.error(err.message);
     }
 });
 
-app.get("/testentry", async(req, res) => {
-    try{
-        console.log("GET from page!");
-        const ans = await pool.query(
-            "SELECT * FROM test_table;"
-        );
-        res.json(ans.rows);
-    }catch(err){
-        console.log(err.message);
-    }
-});
 
-// Server
+//update productos
+
+app.put("/productos/:id", async (req, res) => {
+    try {
+        
+        const { id } = req.params;
+        const { nombre, descripcion, marca, stock, codigo, unidad, precio, foto } = req.body;
+        const updateProducto = await pool.query("UPDATE productos SET (nombre, descripcion, marca, stock, codigo, unidad, precio, foto) = ($1, $2, $3, $4, $5, $6, $7, $8) WHERE id_productos = $9", 
+        [nombre, descripcion, marca, stock, codigo, unidad, precio, foto, id]);
+
+        res.json("Producto se actualizó")
+
+    } catch (err) {
+        console.error(err.message)
+    }
+})
+
+//borrar productos
+
+app.delete("/productos/:id", async (req, res) => {
+    try {
+        
+        const {id} = req.params;
+        const borraProducto = await pool.query("DELETE FROM productos WHERE id_productos = $1", [id]);
+
+        res.json("Producto se borró");
+
+    } catch (err) {
+        console.error(err.message)
+    }
+})
+
 app.listen(5000, () => {
-    console.log("[Server] started on port 5000.");
+    
+    console.log("Server corriendo en puerto 5000");
 });
-
