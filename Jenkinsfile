@@ -44,7 +44,17 @@ pipeline {
       }
       steps {
         sh 'docker-compose up --build -d'
-        sh 'docker ps -a'
+      }
+    }
+    stage('Check Logs'){
+      agent {
+        label 'master'
+      }
+      options {
+        skipDefaultCheckout()
+      }
+      steps {
+        sh './jenkins/scripts/checklogs.sh'
       }
     }
   }
