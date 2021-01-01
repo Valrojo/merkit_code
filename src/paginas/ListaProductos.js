@@ -25,41 +25,13 @@ const ListaProductos = () => {
 
     return(
         <Fragment>
-            {/*
-            <table className="table table-sm text-center ">
-                <thead>
-                <tr>
-                    <th>Imagen</th>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Boton</th>
-                </tr>
-                </thead>
-                <tbody>
-                {producto.map(producto=> (
-                    <tr key={producto.id_producto}>
-                        
-                        <td><img src={x} /></td>
-                        
-                        <td>{producto.nombre}</td>
-
-                        <td>{producto.descripcion}</td>
-
-                        <td>
-                            <button className="btn btn-primary" >
-                                +
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-                */}
 
             <div className="row"> 
 
             {producto.map(productos=> (
-                <div className="card" style={{alignItems: 'center', width: "300px" }} key={productos.id_producto}>
+                <div className="card text-center" style={{alignItems: 'center', width: "200px" }} 
+                key={productos.id_producto}>
+                    
                 <img className="card-img-top" src={x} alt=""/>
                 <div className="card-body">
                     <h4 className="card-title">{productos.nombre}</h4>
