@@ -33,8 +33,8 @@ function App() {
 
         <div style={{ width: "210px", flex: "0 0 auto" }}>
           <BarraLateral/>
-        </div>
-
+       </div>
+        {/* <BarraLateral/> */}
         <div style={{ flex: "1 1" }}>
           <Switch>
             <Route path = '/' exact component={Ventas}/>
@@ -42,7 +42,7 @@ function App() {
             <Route path = '/resumen' component={Resumen}/>
             <Route path = '/calculadora' component={Calculadora}/>
           </Switch>
-        </div>
+      </div>
           
         </div>
         

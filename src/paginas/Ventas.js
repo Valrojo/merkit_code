@@ -6,7 +6,7 @@ function Ventas() {
         
         <div className = 'ventas'>
             
-            <div className = "container">
+            <div className = "container" style={{position: "static" }}>
 
             <ListaProductos />
             

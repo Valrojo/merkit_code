@@ -11,6 +11,7 @@ import { IconContext } from 'react-icons'
 function BarraLateral() {
 
     return (
+        
         <IconContext.Provider value = {{color: '#324237'}}> 
             <nav className = 'nav-menu active'>
                 <ul className = 'nav-menu-items'>
