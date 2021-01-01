@@ -19,6 +19,7 @@ function App() {
       display: "flex",
       flexFlow: "column nowrap" }}
     >
+      
       <div><BarritaArriba/></div>
       {/*<div className='barraSup'/>*/}
 

@@ -90,6 +90,20 @@ app.delete("/productos/:id", async (req, res) => {
     }
 })
 
+//filter productos
+
+app.get("/productos/search/:condicion", async(req,res) => {
+    try {
+        const {condicion} = req.params;
+        const algunosProductos = await pool.query("SELECT * FROM productos WHERE nombre like $1 or descripcion like $1 or nombre like $2 or descripcion like $2 or nombre like $3 or descripcion like $3 or nombre like $4 or descripcion like $4",[condicion+'%', condicion, '%'+condicion, '%'+condicion+'%']);
+        
+        res.json(algunosProductos.rows);
+
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 app.listen(5000, () => {
     
     console.log("Server corriendo en puerto 5000");
