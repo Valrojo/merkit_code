@@ -20,7 +20,7 @@ function App() {
       flexFlow: "column nowrap" }}
     >
       
-      <div><BarritaArriba/></div>
+      <div style={{ flex: "0" }}><BarritaArriba/></div>
       {/*<div className='barraSup'/>*/}
 
       <Router>
@@ -32,18 +32,23 @@ function App() {
           alignItems: "stretch"}}
         >
 
-        <div style={{ width: "210px", flex: "0 0 auto" }}>
+        <div style={{width: "210px", flex: "0 0 auto" }}>
           <BarraLateral/>
        </div>
         {/* <BarraLateral/> */}
-        <div style={{ flex: "1 1" }}>
+        <div style={{
+          display: "flex", 
+          flex: "1 1", 
+          justifyContent: 'space-evenly',
+          flexFlow: "column reverse"
+          }}>
           <Switch>
             <Route path = '/' exact component={Ventas}/>
             <Route path = '/inventario' component={Inventario}/>
             <Route path = '/resumen' component={Resumen}/>
             <Route path = '/calculadora' component={Calculadora}/>
           </Switch>
-      </div>
+        </div>
           
         </div>
         

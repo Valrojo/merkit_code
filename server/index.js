@@ -95,7 +95,7 @@ app.delete("/productos/:id", async (req, res) => {
 app.get("/productos/search/:condicion", async(req,res) => {
     try {
         const {condicion} = req.params;
-        const algunosProductos = await pool.query("SELECT * FROM productos WHERE nombre like $1 or descripcion like $1 or nombre like $2 or descripcion like $2 or nombre like $3 or descripcion like $3 or nombre like $4 or descripcion like $4",[condicion+'%', condicion, '%'+condicion, '%'+condicion+'%']);
+        const algunosProductos = await pool.query("SELECT * FROM productos WHERE lower(nombre) like lower($1) or lower(descripcion) like lower(lower($1)) or lower(nombre) like lower($2) or lower(descripcion) like lower($2) or lower(nombre) like lower($3) or lower(descripcion) like lower($3) or lower(nombre) like lower($4) or lower(descripcion) like lower($4)",[condicion+'%', condicion, '%'+condicion, '%'+condicion+'%']);
         
         res.json(algunosProductos.rows);
 
