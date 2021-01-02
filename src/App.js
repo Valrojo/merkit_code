@@ -20,39 +20,37 @@ function App() {
       flexFlow: "column nowrap" }}
     >
       
-      <div style={{ flex: "0" }}><BarritaArriba/></div>
-      {/*<div className='barraSup'/>*/}
+        <div style={{ flex: "0" }}><BarritaArriba/></div>
+        {/*<div className='barraSup'/>*/}
 
-      <Router>
-       
-       <div style={{
-          display: "flex",
-          flexFlow: "row nowrap",
-          flex: "1 1",
-          alignItems: "stretch"}}
-        >
-
-        <div style={{width: "210px", flex: "0 0 auto" }}>
-          <BarraLateral/>
-       </div>
-        {/* <BarraLateral/> */}
-        <div style={{
-          display: "flex", 
-          flex: "1 1", 
-          justifyContent: 'space-evenly',
-          flexFlow: "column reverse"
-          }}>
-          <Switch>
-            <Route path = '/' exact component={Ventas}/>
-            <Route path = '/inventario' component={Inventario}/>
-            <Route path = '/resumen' component={Resumen}/>
-            <Route path = '/calculadora' component={Calculadora}/>
-          </Switch>
-        </div>
-          
-        </div>
+        <Router>
         
-      </Router>
+          <div style={{
+              display: "flex",
+              flexFlow: "row nowrap",
+              alignItems: "stretch"}}
+            >
+
+            <div style={{width: "210px", flex: "1" }}>
+              <BarraLateral/>
+            </div>
+            
+            <div style={{
+              display: "flex", 
+              flex: "5.2", 
+              flexFlow: "column reverse"
+              }}>
+              <Switch>
+                <Route path = '/' exact component={Ventas}/>
+                <Route path = '/inventario' component={Inventario}/>
+                <Route path = '/resumen' component={Resumen}/>
+                <Route path = '/calculadora' component={Calculadora}/>
+              </Switch>
+            </div>
+              
+            </div>
+          
+        </Router>
     </div>
   );
   

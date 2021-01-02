@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
-import x from './x.jpg';
-import {barraBusqueda} from "../componentes/BarritaArriba"
+import x from './automata.jpg';
+import {barraBusqueda} from "./BarritaArriba"
 
 
 
@@ -30,21 +30,21 @@ const ListaProductos = () => {
     return(
         <Fragment>
 
-            <div className="row row-cols-2 row-cols-md-5 g-4"> 
+            <div className="row row-cols-1 row-cols-md-4 g-4"style={{
+                    position: 'relative'}} > 
 
             {producto.map(productos=> (
                 <div className="col card text-center" style={{
                     alignItems: 'center', 
-                    width: "200px", 
-                    height: "400px",
+                    height: "300px",
 
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-around"}} 
+
                         key={productos.id_producto}>
                         
-                            <Fragment className= "embed-responsive embed-responsive-1by1">
-                            <img className="card-img-top embeded-responsive-item" src={x} alt=""/>
+                            <Fragment>
                             </Fragment>
 
                             <div className="card-body" 
@@ -54,6 +54,9 @@ const ListaProductos = () => {
                                     justifyContent: "space-around",
                                     alignItems: "center"
                                     }}>
+
+                                <img className="card-img-top   " src={x} alt=""/>
+
                                 <h4 className="card-title">{productos.nombre}</h4>
                                 <p className="card-text">{productos.descripcion}</p>
                                 <p className="card-text">{productos.precio}</p>

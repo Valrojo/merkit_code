@@ -2,3 +2,7 @@ Las tarjetas tienen un bug
     -Al minimizar la ventana (las tarjetas bajan sin razon)
     -Al colocar titulos de longitudes muy largas (los componentes de adentro se mueven un poquito)
     -Probablemente al colocar imagenes de distintos tamaños (los componentes de adentro se mueven)
+    -Los botones + estan todos desordenados
+
+Lista venta:
+    -Me eché la barra lateral al minimizar
