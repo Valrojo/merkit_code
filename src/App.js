@@ -4,13 +4,11 @@ import BarraLateral from './componentes/BarraLateral';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import Ventas from './paginas/Ventas';
-import Inventario from './paginas/Inventario';
+import PageInventario from './paginas/PageInventario';
 import Resumen from './paginas/Resumen';
 import Calculadora from './paginas/Calculadora';
 
 function App() {
-
-
   return (
     <div style={{ 
       height: "100vh", 
@@ -31,7 +29,7 @@ function App() {
           <div style={{ flex: "1 1" }}>
             <Switch>
               <Route path = '/' exact component={Ventas}/>
-              <Route path = '/inventario' component={Inventario}/>
+              <Route path = '/inventario' component={PageInventario}/>
               <Route path = '/resumen' component={Resumen}/>
               <Route path = '/calculadora' component={Calculadora}/>
             </Switch>

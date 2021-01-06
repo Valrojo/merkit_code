@@ -1,12 +1,11 @@
 //Escribir rfce y enter
 //Usando iconos de react
 
-import React, {useState} from 'react'
-import * as iconoReact from "react-icons/fc";
-import { Link } from 'react-router-dom'
-import { DatosBarra } from './DatosBarra'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { DatosBarra } from './DatosBarra';
 import './BarraLateral.css';
-import { IconContext } from 'react-icons'
+import { IconContext } from 'react-icons';
 
 function BarraLateral() {
 
