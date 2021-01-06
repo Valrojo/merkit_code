@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
-import x from './automata.jpg';
-import {barraBusqueda} from "./BarritaArriba"
+import x from './x.jpg';
+import BarraBusqueda from "./BarraBusqueda"
 
 
 
@@ -28,7 +28,10 @@ const ListaProductos = () => {
     }, []);
 
     return(
-        <Fragment>
+
+
+        <div className="container">
+
 
             <div className="row row-cols-1 row-cols-md-4 g-4"style={{
                     position: 'relative'}} > 
@@ -39,7 +42,7 @@ const ListaProductos = () => {
                     height: "300px",
 
                     display: "flex",
-                    flexDirection: "column",
+                    flexDirection: "col",
                     justifyContent: "space-around"}} 
 
                         key={productos.id_producto}>
@@ -70,7 +73,7 @@ const ListaProductos = () => {
             ))}
 
             </div>
-        </Fragment>
+        </div>
     )
 };
 

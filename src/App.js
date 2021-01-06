@@ -20,7 +20,7 @@ function App() {
       flexFlow: "column nowrap" }}
     >
       
-        <div style={{ flex: "0" }}><BarritaArriba/></div>
+        <div style={{/*  display: 'flex', flexFlow: 'col', flex: */}}><BarritaArriba/></div>
         {/*<div className='barraSup'/>*/}
 
         <Router>
@@ -47,6 +47,8 @@ function App() {
                 <Route path = '/calculadora' component={Calculadora}/>
               </Switch>
             </div>
+              
+
               
             </div>
           
