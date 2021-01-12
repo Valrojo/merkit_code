@@ -34,6 +34,16 @@ export default class Inventario extends Component{
         }
     }
 
+    addProduct(name){
+        this.productos.push({
+            id: this.productos.length,
+            nombre: name,
+            descripcion: "New",
+            marca: "New",
+            precio: 1100
+        });
+    }
+
     render(){
         // Nothing
     }

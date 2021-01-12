@@ -1,14 +1,17 @@
 import './App.css';
-import React, { Fragment } from 'react';
+import React from 'react';
 import BarraLateral from './componentes/BarraLateral';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import Ventas from './paginas/Ventas';
 import PageInventario from './paginas/PageInventario';
-import Resumen from './paginas/Resumen';
-import Calculadora from './paginas/Calculadora';
+import PageVentas from './paginas/PageVentas';
+import PageResumen from './paginas/PageResumen';
+import PageCalculadora from './paginas/PageCalculadora';
+import Inventario from './clases/Inventario';
 
 function App() {
+  let refInventario = new Inventario();
+
   return (
     <div style={{ 
       height: "100vh", 
@@ -28,10 +31,18 @@ function App() {
           </div>
           <div style={{ flex: "1 1" }}>
             <Switch>
-              <Route path = '/' exact component={Ventas}/>
-              <Route path = '/inventario' component={PageInventario}/>
-              <Route path = '/resumen' component={Resumen}/>
-              <Route path = '/calculadora' component={Calculadora}/>
+              <Route exact path = '/'>
+                <PageVentas/>
+              </Route>
+              <Route path = '/inventario'>
+                <PageInventario inventario={refInventario}/>
+              </Route>
+              <Route path = '/resumen'>
+                <PageResumen/>
+              </Route>
+              <Route path = '/calculadora'>
+                <PageCalculadora/>
+              </Route> 
             </Switch>
           </div>
         </div>

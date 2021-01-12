@@ -8,11 +8,32 @@ export default class PageInventario extends Component{
     constructor(){
         super();
         this.inventario = new Inventario();
-        
         this.renderProductos = () => {
+            if(this.inventario){
+                let cardList = [];
+                for(const producto of this.inventario.productos){
+                    cardList.push(
+                        <ItemCard
+                            key={producto.id}
+                            nombre={producto.nombre}
+                            descripcion={producto.descripcion}
+                            marca={producto.marca}
+                            precio={producto.precio}
+                            imagen={x}
+                        />
+                    )
+                }
+                return cardList;
+            }else{
+                // undefined
+            }
+        }
+    }
+
+    /* renderProductos(){
+        if(this.inventario){
             let cardList = [];
             for(const producto of this.inventario.productos){
-                console.log(producto);
                 cardList.push(
                     <ItemCard
                         key={producto.id}
@@ -25,7 +46,13 @@ export default class PageInventario extends Component{
                 )
             }
             return cardList;
+        }else{
+            // undefined
         }
+    } */
+
+    componentDidMount(){
+        this.inventario = this.props.inventario;   
     }
 
     render(){
@@ -63,12 +90,3 @@ export default class PageInventario extends Component{
         );
     }
 }
-{/* <div className = 'inventario'>
-    <ItemCard
-        nombre="nombre1"
-        descripcion="desc2"
-        marca="marca3"
-        precio="$12354"
-        imagen={x}
-    />
-</div> */}
