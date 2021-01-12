@@ -9,7 +9,7 @@ function Ventas() {
         
         <div className = 'ventas' style={{display: 'flex', flexDirection: 'row'}}>
             
-            <div className = "container" style={{flex: '3', paddingTop: '450px', paddingLeft: '20px'}}>
+            <div className = "container" style={{flex: '3', paddingTop: '150px', paddingLeft: '20px'}}>
                 <ListaProductos />
             </div>
 

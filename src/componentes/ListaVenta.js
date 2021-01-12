@@ -1,44 +1,124 @@
-import React from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 
 
 function ListaVenta(){
+
+    const [venta, setVentas] = useState([]);
+    const [productos, setProductos] = useState([]);
+    
+    //get productos ventas
+    const getPV = async (id_venta) => {
+
+        try {
+            
+            const getPV = await fetch(`http://localhost:5000/itemVenta/${id_venta}`,
+            {method: "GET"}
+            );
+
+            console.log(id_venta);
+            setProductos(dataJson);
+
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
+    //Crea ventas
+    const creaVenta = async (id_venta) => {
+
+        try {
+            
+            const creaVenta = await fetch("http://localhost:5000/ventas",
+            {method: "POST"}
+            );
+
+            console.log(creaVenta);
+            /* setVentas(venta.filter(ventas => ventas.id_venta !== id_venta)) */
+
+            window.location = "/"
+
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
+    //Borra ventas
+    const borraVenta = async (id_venta) => {
+
+        try {
+            
+            const borraVenta = await fetch(`http://localhost:5000/ventas/${id_venta}`,
+            {method: "DELETE"}
+            );
+
+            console.log(borraVenta);
+            setVentas(venta.filter(ventas => ventas.id_venta !== id_venta))
+
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
+
+    //get ventas
+    const getVenta = async () => {
+
+        try {
+            
+            const respuesta = await fetch("http://localhost:5000/ventas");
+            const dataJson = await respuesta.json();
+
+            setVentas(dataJson);
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
+    useEffect(() =>{
+        getVenta();
+        getPV();
+    }, []);
+
+    
+
     return (
 
         <div className = 'listaVenta' style={{ position: 'fixed', width: '37%', paddingLeft: '5px'}} >
 
             <div id="accordion">
 
+            {venta.map(ventas=> (
+
                 <div className="card">
 
                     <div className="card-header" id="headingOne">
                         <h5 className="mb-0">
-                            <button className="btn" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Venta
-                            </button>
+                            <div className="btn" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style={{display: 'flex', flexDirection: 'row'}} key={ventas.id_venta}>
+                                <div style={{flex: '5', alignItems: 'right'}}>{ventas.id_venta}</div>
+                                
+                            </div>
+                            <button className="btn-warning" style={{flex: '1'}} onClick={() => borraVenta(ventas.id_venta)}>Borrar</button>
                         </h5>
                     </div>
 
-                    <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div className="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                    </div>
+                    
+                        <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordion" /* onClick={() => getPV(ventas.id_venta)} */>
+                            <div className="card-body">
 
-                    <div className="card-header" id="headingTwo">
-                        <h5 className="mb-0">
-                            <button className="btn" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            Venta
-                            </button>
-                        </h5>
-                    </div>
+                            {/* {productos.map(producto=> ( */}
+                                <ul className="list-group">
+                                    <li className="list-group-item">unu{/* {producto.id_producto} */}</li>
+                                </ul>
+                             {/* ))} */}
 
-                    <div id="collapseTwo" className="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
-                        <div className="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
                         </div>
-                    </div>
+                   
 
                 </div>
+            ))}
+
+                <button className="btn btn-primary" style={{width: "100%"}} onClick={() => creaVenta()}>Crear venta</button>
 
             </div>
 
