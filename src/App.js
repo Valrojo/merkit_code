@@ -13,23 +13,30 @@ function App() {
   let refInventario = new Inventario();
 
   return (
-    <div style={{ 
-      height: "100vh", 
+    <div style={{
       display: "flex",
-      flexFlow: "column nowrap" }}
+      height: "100vh",
+      width: "100vw",
+      flexFlow: "column",
+      alignItems: "stretch"
+    }}
     >
       <div className='barraSup'/>
       <Router>
         <div style={{
           display: "flex",
-          flexFlow: "row nowrap",
-          flex: "1 1",
-          alignItems: "stretch"}}
+          flex: "1 1 auto",
+          alignItems: "stretch" }}
         >
-          <div style={{ width: "210px", flex: "0 0 auto" }}>
+          <div style={{ width: "210px", height: "100%", flex: "none" }}>
             <BarraLateral/>
           </div>
-          <div style={{ flex: "1 1" }}>
+          <div style={{
+            display: "flex",
+            flex: "1",
+            minHeight: "0",
+            alignItems: "stretch" }}
+          >
             <Switch>
               <Route exact path = '/'>
                 <PageVentas/>
@@ -38,7 +45,7 @@ function App() {
                 <PageInventario inventario={refInventario}/>
               </Route>
               <Route path = '/resumen'>
-                <PageResumen/>
+                <PageResumen inventario={refInventario}/>
               </Route>
               <Route path = '/calculadora'>
                 <PageCalculadora/>

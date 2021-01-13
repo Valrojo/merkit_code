@@ -7,11 +7,23 @@ import Inventario from '../clases/Inventario';
 export default class PageInventario extends Component{
     constructor(){
         super();
-        this.inventario = new Inventario();
+        this.state = {
+            inventario: undefined,
+            height: 0
+        };
+
+        this.updateWindowDimensions = () => {
+            console.log("Update!");
+            this.setState({
+              height: window.innerHeight
+            })
+          };
+
         this.renderProductos = () => {
-            if(this.inventario){
+            const { inventario } = this.state;
+            if(inventario !== undefined){
                 let cardList = [];
-                for(const producto of this.inventario.productos){
+                for(const producto of inventario.productos){
                     cardList.push(
                         <ItemCard
                             key={producto.id}
@@ -24,69 +36,62 @@ export default class PageInventario extends Component{
                     )
                 }
                 return cardList;
-            }else{
-                // undefined
             }
+        }
+
+        this.onClickAddButton = (nombre) => {
+            let { inventario } = this.state;
+            if(inventario !== undefined){
+                inventario.addProduct(nombre);
+            }
+            this.forceUpdate();
         }
     }
 
-    /* renderProductos(){
-        if(this.inventario){
-            let cardList = [];
-            for(const producto of this.inventario.productos){
-                cardList.push(
-                    <ItemCard
-                        key={producto.id}
-                        nombre={producto.nombre}
-                        descripcion={producto.descripcion}
-                        marca={producto.marca}
-                        precio={producto.precio}
-                        imagen={x}
-                    />
-                )
-            }
-            return cardList;
-        }else{
-            // undefined
-        }
-    } */
-
     componentDidMount(){
-        this.inventario = this.props.inventario;   
+        this.setState({ inventario: this.props.inventario });
+        // Para las dimensiones:
+        this.updateWindowDimensions();
+        window.addEventListener("resize", this.updateWindowDimensions);
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener("resize", this.updateWindowDimensions);
     }
 
     render(){
-        const { renderProductos } = this;
+        const { renderProductos, onClickAddButton } = this;
+        const { height } = this.state;
+        const listHeight = `${height - 20}px`;
         return (
-            <div className="inventario h-100" 
-                style={{
-                    display: "flex",
-                    flexFlow: "row nowrap",
-                    flex: "1 1",
-                    alignItems: "stretch"
-                }}
-            >
+            <Fragment>
                 <div style={{
-                    textAlign: "center",
-                    width: "150px",
-                    backgroundColor: "#DCDCDC"}}
+                        textAlign: "center",
+                        width: "100px",
+                        backgroundColor: "#DCDCDC" 
+                    }}
                 >
-                    <button 
-                        className="btn btn-primary font-weight-bold"
-                        style={{ margin: "10px", width: "100px", height: "100px" }}
+                    <button className="btn btn-primary font-weight-bold"
+                        style={{ margin: "10px", width: "80px", height: "80px" }}
+                        onClick={ () => onClickAddButton("Nuevo Item") }
                     >
                         +
                     </button>
                 </div>
-                <div style={{
-                    display: "flex",
-                    flexFlow: "row wrap",
-                    flex: "1 1",
-                    alignItems: "flex-start" }}
+                <div 
+                    style={{
+                        display: "flex",
+                        flex: "1",
+                        flexFlow: "row wrap",
+                        alignItems: "flex-start",
+                        minHeight: "0",
+                        height: listHeight,
+                        overflowY: "auto" 
+                    }}
                 >
                     {renderProductos()}
                 </div>
-            </div>
+            </Fragment>
         );
     }
 }

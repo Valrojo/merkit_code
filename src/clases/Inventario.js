@@ -1,8 +1,5 @@
-import { Component } from 'react';
-
-export default class Inventario extends Component{
+export default class Inventario{
     constructor(){
-        super();
         this.productos = [
             {
                 id: 1,
@@ -27,7 +24,7 @@ export default class Inventario extends Component{
             }
         ];
         // Para popular
-        for(let i=4; i < 25; ++i){
+        for(let i=4; i < 20; ++i){
             let otro = {...this.productos[i%3]};
             otro.id = i;
             this.productos.push(otro);
@@ -36,7 +33,7 @@ export default class Inventario extends Component{
 
     addProduct(name){
         this.productos.push({
-            id: this.productos.length,
+            id: this.productos.length + 1,
             nombre: name,
             descripcion: "New",
             marca: "New",
@@ -44,7 +41,7 @@ export default class Inventario extends Component{
         });
     }
 
-    render(){
-        // Nothing
+    getCount(){
+        return this.productos.length;
     }
 }
