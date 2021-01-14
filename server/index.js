@@ -207,6 +207,21 @@ app.put("/itemVenta/:id_venta&:id_producto", async (req, res) => {
     }
 })
 
+//borraun producto de una venta
+
+app.delete("/itemVenta/:id_venta&:id_producto", async (req, res) => {
+    try {
+        
+        const id_venta = req.params.id_venta;
+        const id_productos = req.params.id_producto;
+        const borraProductosVenta = await pool.query("DELETE FROM item_venta WHERE id_venta = $1 AND id_productos = $2", [id_venta, id_productos]);
+
+        res.json("Producto de venta borrados");
+
+    } catch (err) {
+        console.error(err.message)
+    }
+})
 
 //borrar todos los productos de una venta
 

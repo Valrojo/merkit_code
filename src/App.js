@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import BarraLateral from './componentes/BarraLateral';
 import BarritaArriba from './componentes/BarritaArriba'
 
-import Ventas from './paginas/Ventas';
+import Ventas from './paginas/PageVentas';
 import Inventario from './paginas/Inventario';
 import Resumen from './paginas/Resumen';
 import Calculadora from './paginas/Calculadora';
@@ -20,26 +20,27 @@ function App() {
       flexFlow: "column nowrap" }}
     >
       
-        <div style={{/*  display: 'flex', flexFlow: 'col', flex: */}}><BarritaArriba/></div>
-        {/*<div className='barraSup'/>*/}
+      <BarritaArriba/>
 
         <Router>
         
           <div style={{
               display: "flex",
               flexFlow: "row nowrap",
-              alignItems: "stretch"}}
+              alignItems: "stretch",
+              flex: '1 1'}}
             >
 
-            <div style={{width: "210px", flex: "1" }}>
+            <div style={{width: "210px", flex: "0 0 auto" }}>
               <BarraLateral/>
             </div>
             
             <div style={{
               display: "flex", 
-              flex: "5.2", 
+              flex: "1 1", 
               flexFlow: "column reverse"
               }}>
+
               <Switch>
                 <Route path = '/' exact component={Ventas}/>
                 <Route path = '/inventario' component={Inventario}/>
