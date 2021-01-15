@@ -1,6 +1,6 @@
 import React, {Component,Fragment, useEffect, useState} from 'react'
 import ProductosVenta from './ProductosVenta'
-
+import ComponenteVenta from './ComponenteVenta'
 export default class ListaVenta extends Component {
 
     constructor(){
@@ -9,18 +9,29 @@ export default class ListaVenta extends Component {
             venta: null 
         
           };
+        
 
 
-        //Crea ventas
-        this.creaVenta = async (id_venta) => {
+        this.creaVenta = () => {
+
+            for (var i = 0; i < 3; i++){
+                this.props.listaVenta.push(new ComponenteVenta())
+            }
+            console.log(this.props)
+            
+            
+        }
+
+        //Crea ventas a base de datos
+        this.creaVentaBD = async (id_venta) => {
     
             try {
                
-                const creaVenta = await fetch("http://localhost:5000/ventas",
+                const creaVentaBD = await fetch("http://localhost:5000/ventas",
                 {method: "POST"}
                 );
     
-                console.log(creaVenta);
+                console.log(creaVentaBD);
     
                 window.location = "/"
     
@@ -29,103 +40,132 @@ export default class ListaVenta extends Component {
             }
         }
     
-        //Borra ventas
-        this.borraVenta = async (id_venta) => {
-    
-            try {
-                
-                const borraProductos = await fetch(`http://localhost:5000/itemVenta/${id_venta}`,
-                {method: "DELETE"}
-                );
-                const borraVenta = await fetch(`http://localhost:5000/ventas/${id_venta}`,
-                {method: "DELETE"}
-                );
-    
-                /* console.log(borraVenta); */
-                /* this.state.venta.filter(venta => venta.id_venta !== id_venta) */ 
-    
-            } catch (err) {
-                console.error(err.message)
-            }
-        }
-    
-        
-    
-        //get ventas
-        this.getVenta = async () => {
-            
-            try {
-                
-                const respuesta = await fetch("http://localhost:5000/ventas");
-                const dataJson = await respuesta.json();
-
-                this.setState({venta: dataJson});
-                
-            } catch (err) {
-                console.error(err.message)
-            }
-        }
 
         this.renderVentas =(venta) => {
 
             if (venta !== null){
-
                 return(
-                venta.map(ventas=> (
+                <div>
 
-                    <div className="card" key={ventas.id_venta}>
+                    
+                    <div className="card" /* key={venta.indexOf(ventas)} */>
 
-                        <div className="card-header" id={`heading${ventas.id_venta}`}>
+                        <div className="card-header" id={`headingOne`}>
 
                             <h5 className="mb-0">
-
-                                <button button type="button" className="close" aria-label="Close" style={{flex: '1'}} onClick={() => this.borraVenta(ventas.id_venta)}>x</button>
                                 
-                                <div className="btn" data-toggle="collapse" data-target={`#collapse${ventas.id_venta}`} aria-expanded="true" aria-controls={`collapse${ventas.id_venta}`} style={{display: 'flex', flexDirection: 'row'}} key={ventas.id_venta}>
+                                <div className="btn" data-toggle="collapse" data-target={`#collapseOne`} aria-expanded="true" aria-controls={`collapseOne`} style={{display: 'flex', flexDirection: 'row'}} /* key={venta.indexOf(ventas)} */>
                                     
-                                    <div style={{flex: '5', alignItems: 'right'}}>{ventas.id_venta}</div>
+                                    <div style={{flex: '5', alignItems: 'right'}}>Venta 1</div>
                                     
                                 </div>
                                 
-                            </h5>
+                            </h5> 
                         </div>
-
-                        
-                            <div id={`collapse${ventas.id_venta}`} className="collapse" aria-labelledby={`heading${ventas.id_venta}`} data-parent="#accordion" >
+                            <div id={`collapseOne`} className="collapse" aria-labelledby={`headingOne`} data-parent="#accordion" >
                                 <div className="card-body">
 
-                                    <ProductosVenta id_venta = {ventas.id_venta}/>
-
+                
+                                    {<ProductosVenta venta = {this.props.listaVenta[0]}/> }
+                                    <div>
+                                    
+                                    Su total es de: $owo  
+                                    <button className="btn btn-danger">Finalizar Venta</button>
+                                    </div>
                                 </div>
                             </div>
-                    
 
+                            
                     </div>
-                ))
+
+
+{/* 
+                    <div className="card" /* key={venta.indexOf(ventas)} >
+
+                        <div className="card-header" id={`headingTwo`}>
+
+                            <h5 className="mb-0">
+                                
+                                <div className="btn" data-toggle="collapse" data-target={`#collapseTwo`} aria-expanded="true" aria-controls={`collapseTwo`} style={{display: 'flex', flexDirection: 'row'}} /* key={venta.indexOf(ventas)} >
+                                    
+                                    <div style={{flex: '5', alignItems: 'right'}}>Venta 2</div>
+                                    
+                                </div>
+                                
+                            </h5> 
+                        </div>
+                            <div id={`collapseTwo`} className="collapse" aria-labelledby={`headingTwo`} data-parent="#accordion" >
+                                <div className="card-body">
+                                llamar a productos venta con la lista en 2
+                
+                                <ProductosVenta venta = {this.props.listaVenta[1]}/> 
+                                <div>
+                                    
+                                    Su total es de: $owo  
+                                    <button className="btn btn-danger">Finalizar Venta</button>
+                                </div>
+                                </div>
+                            </div>
+
+                            
+                    </div>
+
+
+
+                    <div className="card" /* key={venta.indexOf(ventas)} >
+
+                        <div className="card-header" id={`headingThree`}>
+
+                            <h5 className="mb-0">
+                                
+                                <div className="btn" data-toggle="collapse" data-target={`#collapseThree`} aria-expanded="true" aria-controls={`collapseThree`} style={{display: 'flex', flexDirection: 'row'}} /* key={venta.indexOf(ventas)} >
+                                    
+                                    <div style={{flex: '5', alignItems: 'right'}}>Venta 3</div>
+                                    
+                                </div>
+                                
+                            </h5> 
+                        </div>
+                            <div id={`collapseThree`} className="collapse" aria-labelledby={`headingThree`} data-parent="#accordion" >
+                                <div className="card-body">
+                                llamar a productos venta con la lista en 2
+                
+                                <ProductosVenta venta = {this.props.listaVenta[2]}/> 
+                                <div>
+                                    
+                                    Su total es de: $owo  
+                                    <button className="btn btn-danger">Finalizar Venta</button>
+                                </div>
+                                </div>
+                            </div>
+
+                         
+                    </div> */}
+
+                    
+                </div>
                 )
             }
             else {console.log("venta es null")}
         }
 
     }
-
-        
-    componentDidMount() {
-        this.getVenta();
+    
+    componentDidMount(){
+        this.creaVenta();
     }
-    
-    
+
     render(){
-        const { venta } = this.state;
+
         return(
             <Fragment>
 
             <div id="accordion" style={{height:"100%"}}>
 
-                {this.renderVentas(venta)}
-            
-                <button className="btn btn-primary" style={{width: "100%"}} onClick={() => this.creaVenta()}>Crear venta</button>
-
+                {
+                this.renderVentas(this.props.listaVenta)
+                }
+        
             </div>
 
         </Fragment>
