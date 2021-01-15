@@ -26,7 +26,7 @@ services:
     environment:
       POSTGRES_PASSWORD: testpass
     volumes:
-      - ../merkit_dbs/db_v1/:/var/lib/postgresql/data/
+      - ../merkit_dbs/db_v2/:/var/lib/postgresql/data/
       - ./server/postgresql.conf:/etc/postgresql/postgresql.conf
       - ./server/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
