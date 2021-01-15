@@ -3,10 +3,12 @@ import React, { useRef } from 'react';
 import BarraLateral from './componentes/BarraLateral';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
+// Pages
 import PageInventario from './paginas/PageInventario';
 import PageVentas from './paginas/PageVentas';
 import PageResumen from './paginas/PageResumen';
 import PageCalculadora from './paginas/PageCalculadora';
+// Classes
 import Inventario from './clases/Inventario';
 
 function App() {

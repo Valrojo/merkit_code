@@ -1,6 +1,3 @@
-//Escribir rfce y enter
-//Usando iconos de react
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { DatosBarra } from './DatosBarra';
