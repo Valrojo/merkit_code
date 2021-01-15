@@ -1,11 +1,1 @@
-Las tarjetas tienen un bug 
-    -Al minimizar la ventana (las tarjetas bajan sin razon)
-    -Al colocar titulos de longitudes muy largas (los componentes de adentro se mueven un poquito)
-    -Probablemente al colocar imagenes de distintos tamaños (los componentes de adentro se mueven)
-    -Los botones + estan todos desordenados
-    -A algunos no les aparece el dropdown
-
-Ventas
-    -Al cerrar o abrir una venta, todas lo hacen
-
-Al minimizar todo tiene problema de tamaños 
+Al finalizar la ventas, da error
