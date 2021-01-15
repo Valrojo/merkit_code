@@ -8,13 +8,15 @@ export default class ComponenteVenta extends Component{
         /* this.productos = []; */
         this.state = {
             productos: [],
+            cantidades: []
             
         }
+        
         
         this.getProductoPorId = (producto) =>{
 
             var cont = 0;
-            productoEncontrado = "Producto no encontrado";
+            var productoEncontrado = "Producto no encontrado";
             while (cont < this.state.productos.length && productoEncontrado != ""){
                 if (this.state.productos[cont].id == producto.id){
                     productoEncontrado = this.state.productos[cont];
@@ -42,35 +44,45 @@ export default class ComponenteVenta extends Component{
 
             return cont;
         }
-        
+        this.agregarProducto=(producto) => {
+            this.state.productos.push(producto);
+            console.log("producto agregado")
+            console.log(this.state.productos)
+            /* this.forceUpdate(); */
+        }
 
 
         this.productosComprados = (producto,cantidad) =>{
 
             var productoVenta = this.getProductoPorId(producto)
-            if (productoVenta.stock >= 0){
-                productoVenta.stock = productoVenta.stock-cantidad;
-            }
+
+            
+            productoVenta.stock = productoVenta.stock-cantidad;
+            
 
             if (productoVenta.stock < 0){
                 productoVenta.stock = 0;
             }
-
-            
         }
 
         this.eliminarProducto = (producto)=>{
             var indiceProducto = this.getIndicePorId(producto)
 
-            delete this.productos[indiceProducto];
+            delete this.state.productos[indiceProducto];
         }
 
+        this.precioTotal = () => {
+            if (this.state.cantidades==undefined || this.state.cantidades.length !== 0){
+                const sum = (acc, curr) =>acc + curr;
+                const total = this.state.cantidades.reduce(sum);
+                return(total);
+            }
+            else{
+                return "-";
+            }
         }
-    agregarProducto=(producto) => {
-        this.state.productos.push(producto);
-        console.log("producto agregado")
-        /* this.forceUpdate(); */
     }
+  
 
 /*     componentDidMount() {
         this._isMount = true;

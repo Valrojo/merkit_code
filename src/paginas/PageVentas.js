@@ -14,6 +14,9 @@ export default class PageVentas extends Component {
             listaVenta: []
         }
 
+    this.funcUpdate = () => {
+        this.forceUpdate();
+    }
     }
 
     
@@ -23,7 +26,7 @@ export default class PageVentas extends Component {
             <div className="h-100" style={{display: 'flex', flexFlow: 'row', alignItems: 'stretch', flex: '1 1'}}>
                     
                 <div className = "container" style={{height: '100%', flex: '3 3', overflowY: "auto", flexFlow: 'row nowrap'}}>
-                    <ListaProductos listaProductos = {this.state.listaProductos} listaVenta = {this.state.listaVenta}/>
+                    <ListaProductos listaProductos = {this.state.listaProductos} funcUpdate = {this.funcUpdate} listaVenta = {this.state.listaVenta}/>
                 </div>
 
                 <div className = "border-left" height='calc(100vh - 56px)' style={{flex: '1 1', paddingRight: '1%', overflowY: "auto"}} >

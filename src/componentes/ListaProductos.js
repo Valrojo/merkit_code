@@ -3,6 +3,7 @@ import ComponenteProducto from './ComponenteProducto'
 import x from './a.jpg';
 import BarraBusqueda from "./BarraBusqueda"
 import ItemProductosVentas from "./ItemProductosVentas"
+import ProductosVenta from "./ProductosVenta";
 
 export default class ListaVenta extends Component {
 
@@ -98,15 +99,38 @@ export default class ListaVenta extends Component {
                                         <p className="card-text">Stock: {producto.stock}</p>
                                         <p className="card-text">${producto.precio}</p>
 
-                                            <div className="dropdown card-footer text-center">
+                                    <div className="dropdown card-footer text-center">
+
+                                            <div>                       
+                                            <input className="form-label" type="number" id="cantidadComprada" min="0" data-bind="value:replyNumber" style = {{width: "40%", height: "10%"}}/>{producto.unidad}
+                                            </div>
+                                            
+
                                             <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                                 Agregar
                                             </button>
             
                                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <div type="button" className="text-center" onClick={() => {this.state.listaVentas[0].agregarProducto(producto), console.log(this.state.listaVentas)}}>Venta 1</div>
-                                                <div type="button" className="text-center">Venta 2</div>
-                                                <div type="button" className="text-center">Venta 3</div>
+                                                <div type="button" className="text-center" 
+                                                onClick={() => 
+                                                    {this.state.listaVentas[0].agregarProducto(producto), 
+                                                    this.state.listaVentas[0].productosComprados(producto, document.getElementById("cantidadComprada").value),
+                                                    this.state.listaVentas[0].state.cantidades.push(document.getElementById("cantidadComprada"))/* ,
+                                                    this.props.funcUpdate(); */
+                                                    }}>
+                                                Venta 1</div>
+                                                <div type="button" className="text-center" onClick={() => 
+                                                    {this.state.listaVentas[1].agregarProducto(producto), 
+                                                    this.state.listaVentas[1].productosComprados(producto, document.getElementById("cantidadComprada").value),
+                                                    this.state.listaVentas[1].state.cantidades.push(document.getElementById("cantidadComprada"))/* ,
+                                                    this.props.funcUpdate(); */
+                                                    }}>Venta 2</div>
+                                                <div type="button" className="text-center" onClick={() => 
+                                                    {this.state.listaVentas[2].agregarProducto(producto), 
+                                                    this.state.listaVentas[2].productosComprados(producto, document.getElementById("cantidadComprada").value),
+                                                    this.state.listaVentas[2].state.cantidades.push(document.getElementById("cantidadComprada"))/* ,
+                                                    this.props.funcUpdate(); */
+                                                    }}>Venta 3</div>
                                             </div>
                                     </div>
                         
@@ -120,7 +144,7 @@ export default class ListaVenta extends Component {
     }}
         
     componentDidMount() {
-        this.setState({listaVentas: this.props.listaVenta, listaProductos: this.props.listaProductos})
+        this.setState({listaVentas: this.props.listaVenta, listaProductos: this.props.listaProductos});
         this.getProducto();
     }
     

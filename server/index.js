@@ -148,7 +148,19 @@ app.post("/itemVenta/:id_venta&:id_producto", async(req,res) => {
  
 app.get("/ventas", async(req,res) => {
     try {
-        const allProductos = await pool.query("SELECT * FROM venta");
+        const allProductos = await pool.query("RETURNING * SELECT * FROM venta");
+        res.json(allProductos.rows);
+
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+//get una venta 
+app.get("/ventas/:id_venta", async(req,res) => {
+    try {
+        const {id_venta} = req.params
+        const allProductos = await pool.query("SELECT * FROM venta WHERE id_venta = $1", [id_venta]);
         res.json(allProductos.rows);
 
     } catch (err) {
