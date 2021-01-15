@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 
 import ItemCard from '../componentes/ItemCard';
+import ModalForm from '../componentes/ModalForm';
 import x from '../componentes/x.jpg';
-import Inventario from '../clases/Inventario';
 
 export default class PageInventario extends Component{
     constructor(){
@@ -13,7 +13,7 @@ export default class PageInventario extends Component{
         };
 
         this.updateWindowDimensions = () => {
-            console.log("Update!");
+            console.log("Updated dimensions!");
             this.setState({
               height: window.innerHeight
             })
@@ -39,17 +39,15 @@ export default class PageInventario extends Component{
             }
         }
 
-        this.onClickAddButton = (nombre) => {
-            let { inventario } = this.state;
-            if(inventario !== undefined){
-                inventario.addProduct(nombre);
-            }
+        this.funcForceUpdate = () => {
+            console.log("Updated component");
             this.forceUpdate();
         }
     }
 
     componentDidMount(){
         this.setState({ inventario: this.props.inventario });
+        this.props.inventario.funcUpdate = this.funcForceUpdate;
         // Para las dimensiones:
         this.updateWindowDimensions();
         window.addEventListener("resize", this.updateWindowDimensions);
@@ -60,9 +58,10 @@ export default class PageInventario extends Component{
     }
 
     render(){
-        const { renderProductos, onClickAddButton } = this;
-        const { height } = this.state;
+        const { renderProductos, funcForceUpdate } = this;
+        const { height, inventario } = this.state;
         const listHeight = `${height - 20}px`;
+        const modalName = "form_modal";
         return (
             <Fragment>
                 <div style={{
@@ -73,10 +72,11 @@ export default class PageInventario extends Component{
                 >
                     <button className="btn btn-primary font-weight-bold"
                         style={{ margin: "10px", width: "80px", height: "80px" }}
-                        onClick={ () => onClickAddButton("Nuevo Item") }
+                        data-toggle="modal" data-target={`#${modalName}`}
                     >
                         +
                     </button>
+                    <ModalForm id={modalName} inventario={this.props.inventario} funcForceUpdate={funcForceUpdate}/>
                 </div>
                 <div 
                     style={{

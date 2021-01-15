@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useRef } from 'react';
 import BarraLateral from './componentes/BarraLateral';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
@@ -18,7 +18,7 @@ function App() {
       height: "100vh",
       width: "100vw",
       flexFlow: "column",
-      alignItems: "stretch"
+      alignItems: "stretch",
     }}
     >
       <div className='barraSup'/>

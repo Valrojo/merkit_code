@@ -3,15 +3,11 @@ import { Component } from 'react';
 export default class PageResumen extends Component{
     constructor(){
         super();
-        this.state = {
-            loaded: false
-        };
     }
     
     componentDidMount(){
         this.inventario = this.props.inventario;
         console.log(this.inventario.getCount());
-        this.setState({ loaded: true });
     }
     
     render(){

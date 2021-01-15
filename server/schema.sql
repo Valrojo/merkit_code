@@ -1,12 +1,51 @@
 -- Always restart db
-DROP DATABASE IF EXISTS test_db;
-CREATE DATABASE test_db;
-\c test_db;
+DROP DATABASE IF EXISTS merkitdb;
 
-CREATE TABLE IF NOT EXISTS test_table (
-  id SERIAL PRIMARY KEY,
-  num INTEGER
+CREATE DATABASE merkitdb;
+
+CREATE TYPE type_unidad AS ENUM ('unidad', 'kg', 'gr');
+
+CREATE TABLE productos
+(
+id_producto serial,
+nombre varchar(20),
+descripcion varchar(20),
+marca varchar(20),
+stock DOUBLE PRECISION,
+codigo varchar(20),
+unidad type_unidad,
+precio int,
+foto varchar(20),
+PRIMARY KEY(id_producto)
 );
 
--- Insert some items
-INSERT INTO test_table VALUES (33), (42), (31);
+CREATE TABLE logs_inventario
+(
+id serial,
+fecha date,
+id_producto int,
+diferenciastock DOUBLE PRECISION,
+tipo type_unidad,
+detalle varchar(100),
+PRIMARY KEY(ID),
+CONSTRAINT fk_productos FOREIGN KEY(id_producto) REFERENCES productos(id_producto)
+);
+
+CREATE TABLE ventas
+(
+id_venta serial,
+fecha date,
+PRIMARY KEY(id_venta)
+);
+
+CREATE TABLE items_venta
+(
+id_venta int,
+id_producto int,
+unidad type_unidad,
+cantidad DOUBLE PRECISION,
+precio int,
+PRIMARY KEY(id_venta,id_producto),
+CONSTRAINT fk_venta FOREIGN KEY(id_venta) REFERENCES ventas(id_venta),
+CONSTRAINT fk_producto FOREIGN KEY(id_producto) REFERENCES productos(id_producto)
+);
