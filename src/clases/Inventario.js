@@ -10,7 +10,7 @@ export default class Inventario{
     async initialFetch(){
         try{
             console.log("Loading productos.");
-            let ans = await fetch("http://http://146.83.216.218:8008/productos");
+            let ans = await fetch("http://146.83.216.218:8008/productos");
             ans = await ans.json();
             this.productos = [];
             for(const producto of ans){

@@ -59,7 +59,7 @@ export default class PageInventario extends Component{
 
     render(){
         const { renderProductos, funcForceUpdate } = this;
-        const { height, inventario } = this.state;
+        const { height } = this.state;
         const listHeight = `${height - 20}px`;
         const modalName = "form_modal";
         return (
