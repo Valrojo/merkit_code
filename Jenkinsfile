@@ -1,38 +1,39 @@
 pipeline {
-  agent none 
+  agent none
   stages {
-    stage('Checkout, Test & Build') {
-        agent {
-          docker {
-            image 'node:10-alpine'
-            args '-p 3001:3000'
+    stage('Check & Clean'){
+      agent {
+        label 'master'
+      }
+      environment {
+        HOME = '.'
+      }
+      stages{
+        stage("Checking"){
+          steps{
+            sh './jenkins/scripts/check.sh'
           }
         }
-        environment {
-          HOME = '.'
-        }
-        stages {
-          stage('Install') {
-            steps {
-              sh 'yarn install'
-            }
-          }
-          stage('Test') {
-            steps {
-              sh './jenkins/scripts/test.sh'
-            }
-          }
-          stage('Build') {
-            steps {
-              sh './jenkins/scripts/build.sh'
-            }
-          }
-          stage('Archive') {
-            steps {
-              archiveArtifacts 'build/**'
-            }
+        stage('Clean'){
+          steps {
+              sh './jenkins/scripts/clean.sh'
           }
         }
+      }
+    }
+    stage('Build') {
+      options {
+        skipDefaultCheckout()
+      }
+      agent {
+        docker { image 'node:latest' }
+      }
+      environment {
+        HOME = '.'
+      }
+      steps {
+        sh './jenkins/scripts/build.sh'
+      }
     }
     stage('Deploy') {
       agent {
@@ -42,12 +43,18 @@ pipeline {
         skipDefaultCheckout()
       }
       steps {
-        sh 'rm -rf /var/www/merkit'
-        sh 'mkdir /var/www/merkit'
-        sh 'pwd'
-        sh 'cp -Rp build/** /var/www/merkit'
-        sh 'docker stop merkit || true && docker rm merkit || true'
-        sh 'docker run -dit --name merkit -p 8007:80 -v /var/www/merkit/:/usr/local/apache2/htdocs/ httpd:2.4'
+        sh 'docker-compose up --build -d'
+      }
+    }
+    stage('Check Logs'){
+      agent {
+        label 'master'
+      }
+      options {
+        skipDefaultCheckout()
+      }
+      steps {
+        sh './jenkins/scripts/checklogs.sh'
       }
     }
   }

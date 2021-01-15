@@ -1,17 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap');
 
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: 'Noto', sans-serif;
-  
 }
 
-.ventas, .inventario, .resumen, .calculadora{
-  display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
+.barraSup {
+  background-color:  #e4f1e9; /*o un hexa*/
+  height: 20px;
+  width: 100vw;
+  flex: none;
+  /* justify-content: start;
+  align-items: center; */
+
+  /*border-width: 1px;
+  border-color:rgb(57, 71, 66);
+  border-style: solid;
+  
+  /*border-color: aquamarine;
+  border-width: 5px;*/
 }

@@ -1,6 +1,11 @@
 .DS_Store
+# From user:
+# ! Lock files are usefull!
+yarn.lock
+server/bd/
+build/
+
 # Logs
-*lock*
 logs
 *.log
 npm-debug.log*

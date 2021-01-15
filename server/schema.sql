@@ -1,3 +1,6 @@
+-- Always restart db
+DROP DATABASE IF EXISTS merkitdb;
+
 CREATE DATABASE merkitdb;
 
 CREATE TYPE type_unidad AS ENUM ('unidad', 'kg', 'gr');

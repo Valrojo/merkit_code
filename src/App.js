@@ -1,39 +1,57 @@
 import './App.css';
-import React, { Fragment } from 'react';
+import React, { useRef } from 'react';
 import BarraLateral from './componentes/BarraLateral';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import Ventas from './paginas/Ventas';
-import Inventario from './paginas/Inventario';
-import Resumen from './paginas/Resumen';
-import Calculadora from './paginas/Calculadora';
+// Pages
+import PageInventario from './paginas/PageInventario';
+import PageVentas from './paginas/PageVentas';
+import PageResumen from './paginas/PageResumen';
+import PageCalculadora from './paginas/PageCalculadora';
+// Classes
+import Inventario from './clases/Inventario';
 
 function App() {
-
+  let refInventario = new Inventario();
 
   return (
-    <div style={{ 
-      height: "100vh", 
+    <div style={{
       display: "flex",
-      flexFlow: "column nowrap" }}
+      height: "100vh",
+      width: "100vw",
+      flexFlow: "column",
+      alignItems: "stretch",
+    }}
     >
       <div className='barraSup'/>
       <Router>
         <div style={{
           display: "flex",
-          flexFlow: "row nowrap",
-          flex: "1 1",
-          alignItems: "stretch"}}
+          flex: "1 1 auto",
+          alignItems: "stretch" }}
         >
-          <div style={{ width: "210px", flex: "0 0 auto" }}>
+          <div style={{ width: "210px", height: "100%", flex: "none" }}>
             <BarraLateral/>
           </div>
-          <div style={{ flex: "1 1" }}>
+          <div style={{
+            display: "flex",
+            flex: "1",
+            minHeight: "0",
+            alignItems: "stretch" }}
+          >
             <Switch>
-              <Route path = '/' exact component={Ventas}/>
-              <Route path = '/inventario' component={Inventario}/>
-              <Route path = '/resumen' component={Resumen}/>
-              <Route path = '/calculadora' component={Calculadora}/>
+              <Route exact path = '/'>
+                <PageVentas/>
+              </Route>
+              <Route path = '/inventario'>
+                <PageInventario inventario={refInventario}/>
+              </Route>
+              <Route path = '/resumen'>
+                <PageResumen inventario={refInventario}/>
+              </Route>
+              <Route path = '/calculadora'>
+                <PageCalculadora/>
+              </Route> 
             </Switch>
           </div>
         </div>

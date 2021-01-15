@@ -6,5 +6,6 @@ echo '"/var/jenkins_home/workspace/merkit-react-app" directory),'
 echo 'correctly bundles React in production mode and optimizes the build for'
 echo 'the best performance.'
 set -x
+npm install --force
 npm run build
 set +x
