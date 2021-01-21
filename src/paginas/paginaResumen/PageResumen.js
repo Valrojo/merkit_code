@@ -6,8 +6,7 @@ export default class PageResumen extends Component{
     }
     
     componentDidMount(){
-        this.inventario = this.props.inventario;
-        console.log(this.inventario.getCount());
+        
     }
     
     render(){

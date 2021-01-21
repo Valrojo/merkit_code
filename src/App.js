@@ -1,19 +1,17 @@
 import './App.css';
 import React, { useRef } from 'react';
-import BarraLateral from './componentes/BarraLateral';
+import BarraLateral from './shared/BarraLateral';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 // Pages
-import PageInventario from './paginas/PageInventario';
-import PageVentas from './paginas/PageVentas';
-import PageResumen from './paginas/PageResumen';
-import PageCalculadora from './paginas/PageCalculadora';
+import PageInventario from './paginas/paginaInventario/PageInventario';
+import PageVentas from './paginas/paginaVentas/PageVentas';
+import PageResumen from './paginas/paginaResumen/PageResumen';
+import PageCalculadora from './paginas/paginaCalculadora/PageCalculadora';
 // Classes
-import Inventario from './clases/Inventario';
+import Inventario from './shared/Inventario';
 
 function App() {
-  let refInventario = new Inventario();
-
   return (
     <div style={{
       display: "flex",
@@ -44,10 +42,10 @@ function App() {
                 <PageVentas/>
               </Route>
               <Route path = '/inventario'>
-                <PageInventario inventario={refInventario}/>
+                <PageInventario/>
               </Route>
               <Route path = '/resumen'>
-                <PageResumen inventario={refInventario}/>
+                <PageResumen/>
               </Route>
               <Route path = '/calculadora'>
                 <PageCalculadora/>

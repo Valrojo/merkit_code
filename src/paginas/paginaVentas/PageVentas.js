@@ -1,7 +1,7 @@
-import React, { Component, Fragment} from 'react'
+import React, { Component, Fragment} from 'react';
 
-import ListaProductos from '../componentes/ListaProductos'
-import ListaVenta from '../componentes/ListaVenta'
+import ListaProductos from './ListaProductos';
+import ListaVenta from './ListaVenta';
 
 export default class PageVentas extends Component {
 

@@ -3,14 +3,13 @@ import { BiLeftArrowAlt } from "react-icons/bi";
 export default class Inventario{
     constructor(){
         this.productos = [];
-        this.funcUpdate = () => {console.log("Default update function.")};
+        this.funcUpdate = () => {};
         this.initialFetch();
     }
 
     async initialFetch(){
         try{
-            console.log("Loading productos.");
-            let ans = await fetch("http://146.83.216.218:8008/productos");
+            let ans = await fetch("http://localhost:5000/productos");
             ans = await ans.json();
             this.productos = [];
             for(const producto of ans){
@@ -26,16 +25,16 @@ export default class Inventario{
                 };
                 this.productos.push(correctedProducto);
             }
-            console.log(`Loaded ${this.getCount()} productos.`);
+            console.log(`[Inventario] Loaded ${this.getCount()} productos.`);
             this.funcUpdate();
         }catch(err){ 
             console.log(err.message);
         }
     }
 
-    async fetchProduct(producto){
+    async sendToDB(producto){
         try{
-            let ans = await fetch(`http://146.83.216.218:8008/productos`,
+            let ans = await fetch(`http://localhost:5000/productos`,
                 {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
@@ -50,13 +49,13 @@ export default class Inventario{
     }
 
     async addProduct(producto){
-        const ans = await this.fetchProduct(producto);
+        const ans = await this.sendToDB(producto);
         if("id_producto" in ans){
             producto.id = ans.id_producto;
             this.productos.push(producto);
             this.funcUpdate();
         }else{
-            console.log("No se retorno id.");
+            console.log(" [Inventario-E] Nuevo ID invalido.");
         }
     }
 

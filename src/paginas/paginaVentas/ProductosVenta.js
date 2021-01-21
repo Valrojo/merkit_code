@@ -67,13 +67,9 @@ export default class ProductosVenta extends Component {
     
     
     render(){
-        
         return(
             <div>
-            
-            {
-            this.renderPV(this.props.venta)}
-
+                { this.renderPV(this.props.venta) }
             </div>
         )
     }

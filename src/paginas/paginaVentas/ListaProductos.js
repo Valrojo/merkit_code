@@ -1,7 +1,7 @@
 import React, {Fragment, useEffect, useState, Component} from "react";
+import BarraBusqueda from "../../shared/BarraBusqueda"
 import ComponenteProducto from './ComponenteProducto'
-import x from './a.jpg';
-import BarraBusqueda from "./BarraBusqueda"
+import x from '../../shared/a.jpg';
 import ItemProductosVentas from "./ItemProductosVentas"
 import ProductosVenta from "./ProductosVenta";
 
@@ -10,12 +10,12 @@ export default class ListaVenta extends Component {
     constructor(){
         super();
         this.state = {
-            producto: null,
+            productos: null,
             listaVentas: null,
             listaProductos: null
-          }
+        }
         
-    //get ventas
+        //get ventas
     
         //crea productos en venta
         this.creaPV = async (id_venta,id_producto,unidad,cantidad,precio) => {
@@ -23,7 +23,7 @@ export default class ListaVenta extends Component {
             try {
                 
                 const body = {unidad, cantidad, precio}
-                const creaPV = await fetch(`http://146.83.216.218:8008/itemVenta/${id_venta}&${id_producto}`,
+                const creaPV = await fetch(`http://localhost:5000/itemVenta/${id_venta}&${id_producto}`,
                 {method: "POST",
                 headers: { "Content-type": "application/json"},
                 body: JSON.stringify(body)
@@ -50,123 +50,115 @@ export default class ListaVenta extends Component {
                     uProducto.precio= producto.precio;
                     uProducto.foto= producto.foto;
 
-                    /* this.state.listaProductos.push(uProducto) */
                     this.state.listaProductos.push(uProducto);
                 })
         }
         }
         
         //get productos
-        this.getProducto = async () => {
+        this.getProductos = async () => {
 
             try {
                 
-                const respuesta = await fetch("http://146.83.216.218:8008/productos");
+                const respuesta = await fetch("http://localhost:5000/productos");
                 const dataJson = await respuesta.json();
 
-                this.setState({producto: dataJson});
+                this.setState({productos: dataJson});
 
             } catch (err) {
                 console.error(err.message)
             }
         }
 
-        this.renderVenta =(productos) =>{
+        this.renderVenta = (productos) =>{
 
             if (productos !== null && this.state.listaProductos !== null && this.state.listaVentas !== null){
-                
+                this.creaComponenteProducto(productos);
                 return(
+                    this.state.listaProductos.map(
+                        producto => ( 
+                            <div className="col card text-center" key={`kp${producto.id}`}>
                         
-                        this.creaComponenteProducto(productos),
+                                <div className="card-body" >
 
-                        this.state.listaProductos.map(producto=> ( 
-                            
-                        <div className="col card text-center"  
-        
-                                key={producto.id}>
-                            
-                                    <div className="card-body" >
-        
-                                        <img className="card-img-top   " src={x} alt="" style = {{
-                                            width: '100%',
-                                            height: '5vw',
-                                            objectFit: 'cover'
-                                        }}/>
-        
-                                    </div>
-                                        <h4 className="card-title">{producto.nombre}</h4>
-                                        <p className="card-text">-{producto.descripcion}</p>
-                                        <p className="card-text">Stock: {producto.stock}</p>
-                                        <p className="card-text">${producto.precio}</p>
+                                    <img className="card-img-top   " src={x} alt="" style = {{
+                                        width: '100%',
+                                        height: '5vw',
+                                        objectFit: 'cover'
+                                    }}/>
 
-                                    <div className="dropdown card-footer text-center">
+                                </div>
+                                    <h4 className="card-title">{producto.nombre}</h4>
+                                    <p className="card-text">-{producto.descripcion}</p>
+                                    <p className="card-text">Stock: {producto.stock}</p>
+                                    <p className="card-text">${producto.precio}</p>
 
-                                            <div>                       
+                                <div className="dropdown card-footer text-center">
+
+                                        <div>                       
                                             <input className="form-label" type="number" id="cantidadComprada" min="0" data-bind="value:replyNumber" style = {{width: "40%", height: "10%"}}/>{producto.unidad}
-                                            </div>
-                                            
+                                        </div>
+                                        
 
-                                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                                Agregar
-                                            </button>
-            
-                                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <div type="button" className="text-center" 
+                                        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                            Agregar
+                                        </button>
+        
+                                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <div type="button" className="text-center" 
                                                 onClick={() => 
                                                     {this.state.listaVentas[0].agregarProducto(producto), 
                                                     this.state.listaVentas[0].productosComprados(producto, document.getElementById("cantidadComprada").value),
                                                     this.state.listaVentas[0].state.cantidades.push(document.getElementById("cantidadComprada"))/* ,
                                                     this.props.funcUpdate(); */
-                                                    }}>
-                                                Venta 1</div>
-                                                <div type="button" className="text-center" onClick={() => 
+                                                    }}
+                                            >Venta 1</div>
+                                            <div type="button" className="text-center" 
+                                                onClick={() => 
                                                     {this.state.listaVentas[1].agregarProducto(producto), 
                                                     this.state.listaVentas[1].productosComprados(producto, document.getElementById("cantidadComprada").value),
                                                     this.state.listaVentas[1].state.cantidades.push(document.getElementById("cantidadComprada"))/* ,
                                                     this.props.funcUpdate(); */
-                                                    }}>Venta 2</div>
-                                                <div type="button" className="text-center" onClick={() => 
+                                                    }}
+                                            >Venta 2</div>
+                                            <div type="button" className="text-center"
+                                                onClick={() => 
                                                     {this.state.listaVentas[2].agregarProducto(producto), 
                                                     this.state.listaVentas[2].productosComprados(producto, document.getElementById("cantidadComprada").value),
                                                     this.state.listaVentas[2].state.cantidades.push(document.getElementById("cantidadComprada"))/* ,
                                                     this.props.funcUpdate(); */
-                                                    }}>Venta 3</div>
-                                            </div>
-                                    </div>
+                                                    }}
+                                            >Venta 3</div>
+                                        </div>
+                                </div>
                         
-                        </div>
-                    ))
-                    
-                )
-        };
-        
-
-    }}
+                            </div>
+                        )
+                    )
+                );
+            }
+        }
+    }
         
     componentDidMount() {
         this.setState({listaVentas: this.props.listaVenta, listaProductos: this.props.listaProductos});
-        this.getProducto();
+        this.getProductos();
     }
     
     
     render(){
-        const { producto } = this.state;
+        const { productos } = this.state;
         return(
             <Fragment>
-
                 <div className="container">
-
-
-                <div className="row row-cols-1 row-cols-md-5 g-4"style={{
+                    <div className="row row-cols-1 row-cols-md-5 g-4"style={{
                         position: 'relative'}} > 
 
-                        {this.renderVenta(producto)}
+                            {this.renderVenta(productos)}
 
+                    </div>
                 </div>
-                </div>
-
-
-        </Fragment>
+            </Fragment>
         
         )
     }

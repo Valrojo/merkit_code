@@ -7,6 +7,7 @@ export default class ModalForm extends Component {
     this.handleSubmit = () => {return false};
 
     this.state = {
+      titulo: "",
       id: null,
       inventario: undefined,
       nombre: "",
@@ -51,8 +52,8 @@ export default class ModalForm extends Component {
   }
       
   componentDidMount(){
-
     this.setState({
+      titulo: this.props.titulo,
       id: this.props.id,
       inventario: this.props.inventario,
 
@@ -60,14 +61,7 @@ export default class ModalForm extends Component {
         event.preventDefault();
         let form = this.formRef.current;
         if(form.checkValidity()){
-          console.log("Should push to bd.");
-          const { id, inventario } = this.state;
-          $(`#${id}`).modal("toggle");
-          
-          if(inventario === undefined){
-            console.log("Inventario can't handle submit.")
-            return false;
-          }
+          const { id } = this.state;
 
           const producto = {
             nombre: this.state.nombre,
@@ -79,22 +73,24 @@ export default class ModalForm extends Component {
             precio: this.state.precio,
             foto: "x.jpg"
           };
-          inventario.addProduct(producto);
+          this.props.buttonFunction(producto);
           
-          this.cleanModalData();
           form.classList.remove("was-validated");
-          this.props.funcForceUpdate();
+          this.cleanModalData();
+          $(`#${id}`).modal("toggle");
+          this.props.functionVisualUpdate();
           return false;
         }else{
+          console.log(" [Form] Invalid data.");
           form.classList.add("was-validated");
         }
       }
     });
-    this.props.funcForceUpdate();
+    this.props.functionVisualUpdate();
   }
   
   render(){
-    const { id, funcHandleSubmit } = this.state;
+    const { titulo, id, funcHandleSubmit } = this.state;
     const {
       renderUnityOptions, handleChange,
       formRef, modalRef
@@ -102,11 +98,11 @@ export default class ModalForm extends Component {
     
     return(
       <div id={id} ref={modalRef} className="modal fade" role="dialog">
-        <div className="modal-dialog" style={{ maxWidth: "800px", width: "75vw" }}>
+        <div className="modal-dialog" style={{ maxWidth: "700px", width: "90vw" }}>
 
         <div className="modal-content">
           <div className="modal-header">
-            <h4 className="modal-title">Agregar nuevo producto</h4>
+            <h4 className="modal-title">{titulo}</h4>
           </div>
 
           <form onSubmit={funcHandleSubmit} ref={formRef} className="needs-validation" noValidate>
