@@ -6,7 +6,12 @@ export default class ItemCard extends Component{
     }
 
     render(){
-        const { nombre, descripcion, marca, precio, imagen } = this.props;
+        const {
+            modalId, modalRef, // For modal use 
+            producto, imagen
+        } = this.props;
+        const { nombre, descripcion, marca, precio } = producto;
+
         return(
             <div 
                 className="card text-center"
@@ -26,7 +31,12 @@ export default class ItemCard extends Component{
                     <div className="card-text mt-auto">${precio}</div>
                 </div>
                 <div className="card-footer">
-                    <button className="btn btn-primary btn-block">Editar</button>
+                    <button className="btn btn-primary btn-block"
+                        data-toggle="modal" data-target={`#${modalId}`}
+                        onClick={() => {
+                            modalRef.current.setData(producto);
+                        }}
+                    >Editar</button>
                 </div>
             </div>
         );

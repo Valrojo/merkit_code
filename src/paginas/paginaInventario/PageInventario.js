@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, createRef, Fragment } from 'react';
 import Inventario from '../../shared/Inventario';
 
 import ItemCard from '../../shared/ItemCard';
@@ -12,6 +12,7 @@ export default class PageInventario extends Component{
         // Constants:
         this.formModalId = "form_modal";
         this.editModalId = "edit_modal";
+        this.editModalRef = createRef();
 
         // Inventario:
         this.funcForceUpdate = () => {
@@ -28,17 +29,16 @@ export default class PageInventario extends Component{
           };
 
         this.renderProductos = () => {
-            const { inventario, editModalId } = this;
+            const { inventario, editModalId, editModalRef } = this;
             let cardList = [];
             for(const producto of inventario.productos){
                 cardList.push(
                     <ItemCard
-                        key={producto.id}
-                        nombre={producto.nombre}
-                        descripcion={producto.descripcion}
-                        marca={producto.marca}
-                        precio={producto.precio}
+                        key={`p${producto.id}`}
+                        producto={producto}
                         imagen={x}
+                        modalId={editModalId}
+                        modalRef={editModalRef}
                     />
                 )
             }
@@ -62,7 +62,8 @@ export default class PageInventario extends Component{
     render(){
         const {
             renderProductos, funcForceUpdate,
-            inventario, formModalId, editModalId
+            inventario, formModalId, 
+            editModalId, editModalRef
         } = this;
         const { height } = this.state;
         // Constans:
@@ -101,7 +102,16 @@ export default class PageInventario extends Component{
                         overflowY: "auto" 
                     }}
                 >
-                    {/* <ModalForm titulo="Agregar nuevo producto" id={editModalId} inventario={inventario} funcForceUpdate={funcForceUpdate}/> */}
+                    <ModalForm titulo="Editar producto" id={editModalId} functionVisualUpdate={funcForceUpdate}
+                        ref={editModalRef}
+                        buttonText="Editar"
+                        buttonFunction={
+                            (producto) => {
+                                console.log("Must edit!");
+                                console.log(producto);
+                            }
+                        }
+                    />
                     {renderProductos()}
                 </div>
             </Fragment>

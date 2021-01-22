@@ -9,7 +9,7 @@ export default class ModalForm extends Component {
     this.state = {
       titulo: "",
       id: null,
-      inventario: undefined,
+      prod_id: null,
       nombre: "",
       descripcion: "",
       marca: "",
@@ -20,32 +20,47 @@ export default class ModalForm extends Component {
       funcHandleSubmit: this.handleSubmit
     };
 
-    this.tipos = [
-      "unidad",
-      "kg",
-      "gr"
-    ]
     this.formRef = createRef();
     this.modalRef = createRef();
 
     this.handleChange = (e) => {
       this.setState({
         [e.target.id]: e.target.value.trim()
-      })
-    }
+      });
+    };
+
+    this.setData = (producto) => {
+      this.setState({
+        prod_id: producto.id,
+        nombre: producto.nombre,
+        descripcion: producto.descripcion,
+        marca: producto.marca,
+        codigo: producto.codigo,
+        unidad: producto.unidad,
+        stock: producto.stock,
+        precio: producto.precio
+      });
+      this.forceUpdate();
+    };
 
     this.cleanModalData = () => {
       $(`.modal-body`).find("input").val("");
-    }
+    };
     
+    // For render:
+    this.tipos = [
+      "unidad",
+      "kg",
+      "gr"
+    ]
     this.renderUnityOptions = () => {
       const { tipos } = this;
       const count = tipos.length;
       if(!count) return [];
       
-      let list = [ <option key="op0" defaultValue>{tipos[0]}</option> ];
-      for(let i = 1; i < count; ++i){
-        list.push( <option key={`op${i}`} value={i}>{tipos[i]}</option> );
+      let list = [];
+      for(let i = 0; i < count; ++i){
+        list.push( <option key={`op${i}`} value={tipos[i]}>{tipos[i]}</option> );
       }
       return list;
     }
@@ -64,6 +79,7 @@ export default class ModalForm extends Component {
           const { id } = this.state;
 
           const producto = {
+            prod_id: this.state.prod_id,
             nombre: this.state.nombre,
             descripcion: this.state.descripcion,
             marca: this.state.marca,
@@ -90,7 +106,10 @@ export default class ModalForm extends Component {
   }
   
   render(){
-    const { titulo, id, funcHandleSubmit } = this.state;
+    const { 
+      titulo, id, funcHandleSubmit,  // shared use
+      nombre, descripcion, marca, codigo, unidad, stock, precio // values for form components
+    } = this.state;
     const {
       renderUnityOptions, handleChange,
       formRef, modalRef
@@ -111,42 +130,42 @@ export default class ModalForm extends Component {
               <div className="form-row">
                 <div className="col">
                   <label htmlFor="nombre">Nombre</label>
-                  <input id="nombre" onChange={handleChange} type="text" className="form-control" required/>
+                  <input id="nombre" value={nombre} onChange={handleChange} type="text" className="form-control" required/>
                   <div className="invalid-feedback">
                     Es necesario un nombre.
                   </div>
                 </div>
                 <div className="col">
                   <label htmlFor="descripcion">Descripción</label>
-                  <input id="descripcion" onChange={handleChange} type="text" className="form-control"/>
+                  <input id="descripcion" value={descripcion} onChange={handleChange} type="text" className="form-control"/>
                 </div>
                 <div className="col">
                   <label htmlFor="marca">Marca</label>
-                  <input id="marca" onChange={handleChange} type="text" className="form-control"/>
+                  <input id="marca" value={marca} onChange={handleChange} type="text" className="form-control"/>
                 </div>
               </div>
 
               <div className="form-row m-b-5">
                 <div className="col">
                   <label htmlFor="codigo">Código</label>
-                  <input id="codigo" onChange={handleChange} type="text" className="form-control"/>
+                  <input id="codigo" value={codigo} onChange={handleChange} type="text" className="form-control"/>
                 </div>
                 <div className="col">
                   <label htmlFor="tipo" className="text-nowrap">Tipo de Unidad</label>
-                  <select onChange={handleChange} className="custom-select">
+                  <select value={unidad} onChange={handleChange} className="custom-select">
                     {renderUnityOptions()}
                   </select>
                 </div>
                 <div className="col">
                   <label htmlFor="stock">Stock</label>
-                  <input id="stock" onChange={handleChange} type="text" className="form-control" required/>
+                  <input id="stock" value={stock} onChange={handleChange} type="text" className="form-control" required/>
                   <div className="invalid-feedback">
                     Es necesario conocer la cantidad.
                   </div>
                 </div>
                 <div className="col">
                   <label htmlFor="precio">Precio</label>
-                  <input id="precio" onChange={handleChange} type="text" className="form-control" required/>
+                  <input id="precio" value={precio} onChange={handleChange} type="text" className="form-control" required/>
                   <div className="invalid-feedback">
                     Es necesario un precio.
                   </div>
