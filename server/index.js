@@ -1,7 +1,7 @@
 const express = require("express"); //express es una libreria
 const app = express();
 const cors = require("cors");
-const pool = require("./db")
+const pool = require("./db");
 
 //middleware
 app.use(cors());
@@ -11,25 +11,28 @@ app.use(express.json()); //req.body
 
 // *****************Productos*************************
 
-//crear productos
+// Crear productos
+//   - Se puede append "RETURNING *" para obtener
+//     el objeto recien creado.
+app.post(
+    "/productos",
+    async (req, res) => {
+        try {
+            console.log(" [S] Creando producto.");
+            const { nombre, descripcion, marca, stock, codigo, unidad, precio, foto } = req.body;
 
-app.post("/productos", async(req,res) => {
-    try {
-        console.log(" [S] Creando producto.");
-        const { nombre, descripcion, marca, stock, codigo, unidad, precio, foto } = req.body;
-
-        const nuevoProducto = await pool.query(
-            "INSERT INTO productos (nombre, descripcion, marca, stock, codigo, unidad, precio, foto) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *", 
-            [nombre, descripcion, marca, stock, codigo, unidad, precio, foto]
-        );
-
-        res.json(nuevoProducto.rows[0]);
-
-    } catch (err) {
-        console.error(err.message);
+            const nuevoProducto = await pool.query(
+                "INSERT INTO productos (nombre, descripcion, marca, stock, codigo, unidad, precio, foto) VALUES($1, $2, $3, $4, $5, $6, $7, $8)", 
+                [nombre, descripcion, marca, stock, codigo, unidad, precio, foto]
+            );
+            res.json(nuevoProducto.rows[0]);
+        } catch (err) {
+            console.error(`[E] ${err.message}`);
+            res.status(400);
+            res.json({ message: err.message });
+        }
     }
-})
-
+)
 
 //get todos los productos
 

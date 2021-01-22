@@ -4,10 +4,10 @@ export default class Inventario{
     constructor(){
         this.productos = [];
         this.funcUpdate = () => {};
-        this.initialFetch();
+        this.getAllFromDB();
     }
 
-    async initialFetch(){
+    async getAllFromDB(){
         try{
             let ans = await fetch("http://localhost:5000/productos");
             ans = await ans.json();
@@ -32,31 +32,34 @@ export default class Inventario{
         }
     }
 
-    async sendToDB(producto){
+    async postToDB(producto){
         try{
             let ans = await fetch(`http://localhost:5000/productos`,
                 {
                     method: "POST",
-                    headers: {"Content-Type": "application/json"},
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(producto)
                 }
             );
-            ans = await ans.json();
+            // ans = await ans.json(); // error "unexpected end of json input"
+            if(!ans.ok) return null;
+            
             return ans;
         }catch(err){
             console.error(err.message);
+            return null;
         }
     }
 
     async addProduct(producto){
-        const ans = await this.sendToDB(producto);
-        if("id_producto" in ans){
-            producto.id = ans.id_producto;
-            this.productos.push(producto);
-            this.funcUpdate();
-        }else{
-            console.log(" [Inventario-E] Nuevo ID invalido.");
+        const ans = await this.postToDB(producto);
+        if(ans === null){
+            console.log(" [Inventario] No se pudo enviar a DB.");
+            return false;
         }
+
+        this.getAllFromDB();
+        return true;
     }
 
     getCount(){

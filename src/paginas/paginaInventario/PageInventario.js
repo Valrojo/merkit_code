@@ -2,7 +2,7 @@ import React, { Component, createRef, Fragment } from 'react';
 import Inventario from '../../shared/Inventario';
 
 import ItemCard from '../../shared/ItemCard';
-import ModalForm from './ModalForm';
+import ModalAddNew from './ModalAddNew';
 import x from '../../shared/x.jpg';
 
 export default class PageInventario extends Component{
@@ -80,14 +80,9 @@ export default class PageInventario extends Component{
                         style={{ margin: "10px", width: "80px", height: "80px" }}
                         data-toggle="modal" data-target={`#${formModalId}`}
                     >+</button>
-                    <ModalForm titulo="Agregar nuevo producto" id={formModalId} functionVisualUpdate={funcForceUpdate}
+                    <ModalAddNew titulo="Agregar nuevo producto" id={formModalId} functionVisualUpdate={funcForceUpdate}
                         buttonText="Crear"
-                        buttonFunction={
-                            (producto) => {
-                                console.log("Button AddNew");
-                                inventario.addProduct(producto);
-                            }
-                        }
+                        buttonFunction={ async (producto) => { await inventario.addProduct(producto); } }
                     />
                 </div>
 
@@ -102,7 +97,7 @@ export default class PageInventario extends Component{
                         overflowY: "auto" 
                     }}
                 >
-                    <ModalForm titulo="Editar producto" id={editModalId} functionVisualUpdate={funcForceUpdate}
+                    <ModalAddNew titulo="Editar producto" id={editModalId} functionVisualUpdate={funcForceUpdate}
                         ref={editModalRef}
                         buttonText="Editar"
                         buttonFunction={

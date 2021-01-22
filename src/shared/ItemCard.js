@@ -10,7 +10,7 @@ export default class ItemCard extends Component{
             modalId, modalRef, // For modal use 
             producto, imagen
         } = this.props;
-        const { nombre, descripcion, marca, precio } = producto;
+        const { nombre, descripcion, marca, precio, stock } = producto;
 
         return(
             <div 
@@ -28,7 +28,8 @@ export default class ItemCard extends Component{
                     <strong className="card-title">{nombre}</strong>
                     <div className="card-text">{descripcion}</div>
                     <div className="card-text">{marca}</div>
-                    <div className="card-text mt-auto">${precio}</div>
+                    <div className="card-text mt-auto">Stock: {stock}</div>
+                    <div className="card-text">${precio}</div>
                 </div>
                 <div className="card-footer">
                     <button className="btn btn-primary btn-block"
