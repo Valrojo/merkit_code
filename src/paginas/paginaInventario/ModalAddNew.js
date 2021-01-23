@@ -8,6 +8,7 @@ export default class ModalAddNew extends Component {
 
     this.state = {
       titulo: "",
+      buttonText: "",
       id: null,
       prod_id: -1,
       nombre: "",
@@ -78,11 +79,13 @@ export default class ModalAddNew extends Component {
   componentDidMount(){
     this.setState({
       titulo: this.props.titulo,
+      buttonText: this.props.buttonText,
       id: this.props.id,
       inventario: this.props.inventario,
+      
 
-      funcHandleSubmit: (event) => {
-        event.preventDefault();
+      funcHandleSubmit: async (event) => {
+        await event.preventDefault();
         let form = this.formRef.current;
         if(form.checkValidity()){
           const { id } = this.state;
@@ -98,7 +101,9 @@ export default class ModalAddNew extends Component {
             precio: this.state.precio,
             foto: "x.jpg"
           };
-          if(this.props.buttonFunction(producto)){
+          const ans = await this.props.buttonFunction(producto);
+          console.log(ans);
+          if(ans){
             form.classList.remove("was-validated");
             this.cleanModalData();
             $(`#${id}`).modal("toggle");
@@ -107,7 +112,6 @@ export default class ModalAddNew extends Component {
           }else{
             console.log(" [Form] False response from button function.");
           }
-          
         }else{
           console.log(" [Form] Invalid data.");
           form.classList.add("was-validated");
@@ -119,7 +123,7 @@ export default class ModalAddNew extends Component {
   
   render(){
     const { 
-      titulo, id, funcHandleSubmit,  // shared use
+      titulo, buttonText, id, funcHandleSubmit,  // shared use
       nombre, descripcion, marca, codigo, unidad, stock, precio // values for form components
     } = this.state;
     const {
@@ -188,7 +192,7 @@ export default class ModalAddNew extends Component {
 
             <div className="modal-footer">
               <button type="submit" className="btn btn-primary" style={{ width: "10rem" }}>
-                Crear
+                {buttonText}
               </button>
               <button type="button" className="btn btn-secondary" data-dismiss="modal">
                 Cancelar

@@ -22,7 +22,8 @@ app.post(
             const { nombre, descripcion, marca, stock, codigo, unidad, precio, foto } = req.body;
 
             const nuevoProducto = await pool.query(
-                "INSERT INTO productos (nombre, descripcion, marca, stock, codigo, unidad, precio, foto) VALUES($1, $2, $3, $4, $5, $6, $7, $8)", 
+                "INSERT INTO productos (nombre, descripcion, marca, stock, codigo, unidad, precio, foto)"
+                + " VALUES($1, $2, $3, $4, $5, $6, $7, $8)", 
                 [nombre, descripcion, marca, stock, codigo, unidad, precio, foto]
             );
             res.json(nuevoProducto.rows[0]);
@@ -37,10 +38,16 @@ app.post(
 //get todos los productos
 
 app.get("/productos", async(req,res) => {
-    
+    const limit = 30; // Myb get this from other side
+    // const offset = 30 * 1; // For later use
     try {
         console.log(" [S] Enviando todo.");
-        const allProductos = await pool.query("SELECT * FROM productos");
+        const allProductos = await pool.query(
+            "SELECT * FROM productos"
+            + " ORDER BY id_producto"
+            + ` LIMIT ${limit}`
+            /* + ` OFFSET ${offset}` // For later use */
+        );
         res.json(allProductos.rows);
 
     } catch (err) {
@@ -50,8 +57,8 @@ app.get("/productos", async(req,res) => {
 
 
 //get un producto
-
-app.get("/productos/:id", async(req,res) => {
+// >>> TODO: Update this function
+/* app.get("/productos/:id", async(req,res) => {
     try {
         const {id} = req.params;
         const producto = await pool.query("SELECT * FROM productos WHERE id_productos = $1",[id]);
@@ -61,21 +68,21 @@ app.get("/productos/:id", async(req,res) => {
     } catch (err) {
         console.error(err.message);
     }
-});
+}); */
 
 
 //update productos
 
 app.put("/productos/:id", async (req, res) => {
     try {
-        
+        console.log(" [S] Updating producto");
         const { id } = req.params;
         const { nombre, descripcion, marca, stock, codigo, unidad, precio, foto } = req.body;
-        const updateProducto = await pool.query("UPDATE productos SET (nombre, descripcion, marca, stock, codigo, unidad, precio, foto) = ($1, $2, $3, $4, $5, $6, $7, $8) WHERE id_productos = $9", 
-        [nombre, descripcion, marca, stock, codigo, unidad, precio, foto, id]);
-
+        await pool.query(
+            "UPDATE productos SET (nombre, descripcion, marca, stock, codigo, unidad, precio, foto) = ($1, $2, $3, $4, $5, $6, $7, $8) WHERE id_producto = $9", 
+            [nombre, descripcion, marca, stock, codigo, unidad, precio, foto, id]
+        );
         res.json("Producto se actualizó")
-
     } catch (err) {
         console.error(err.message)
     }

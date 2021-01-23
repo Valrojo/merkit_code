@@ -82,7 +82,7 @@ export default class PageInventario extends Component{
                     >+</button>
                     <ModalAddNew titulo="Agregar nuevo producto" id={formModalId} functionVisualUpdate={funcForceUpdate}
                         buttonText="Crear"
-                        buttonFunction={ async (producto) => { await inventario.addProduct(producto); } }
+                        buttonFunction={ async (producto) => await inventario.addProduct(producto) }
                     />
                 </div>
 
@@ -101,9 +101,9 @@ export default class PageInventario extends Component{
                         ref={editModalRef}
                         buttonText="Editar"
                         buttonFunction={
-                            (producto) => {
+                            async (producto) => {
                                 console.log("Must edit!");
-                                console.log(producto);
+                                return (await inventario.updateProduct(producto));
                             }
                         }
                     />

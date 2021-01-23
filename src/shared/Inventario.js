@@ -6,6 +6,10 @@ export default class Inventario{
         this.funcUpdate = () => {};
         this.getAllFromDB();
     }
+    
+    getCount(){
+        return this.productos.length;
+    }
 
     async getAllFromDB(){
         try{
@@ -34,7 +38,7 @@ export default class Inventario{
 
     async postToDB(producto){
         try{
-            let ans = await fetch(`http://localhost:5000/productos`,
+            const ans = await fetch(`http://localhost:5000/productos`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -57,12 +61,35 @@ export default class Inventario{
             console.log(" [Inventario] No se pudo enviar a DB.");
             return false;
         }
-
         this.getAllFromDB();
         return true;
     }
 
-    getCount(){
-        return this.productos.length;
+    async putToDB(producto){
+        try{
+            const ans = await fetch(`http://localhost:5000/productos/${producto.prod_id}`,
+                {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(producto)
+                }
+            );
+            console.log(ans);
+            return ans.ok;
+        }catch(err){
+            console.log(err.message);
+            return null;
+        }
+    }
+
+    async updateProduct(producto){
+        const ans = await this.putToDB(producto);
+        console.log(ans); // here is true
+        if(!ans){
+            console.log(" [Inventario] No se pudo actualizar item.");
+            return false;
+        }
+        this.getAllFromDB();
+        return true;
     }
 }
