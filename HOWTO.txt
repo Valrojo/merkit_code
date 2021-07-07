@@ -3,12 +3,14 @@
 $______Requisitos para echar a andar merkit:______$
 ---------------------------------------------------
 
-- postgreSQL
-- nodejs
-- jdk
-- nodemon
-- yarn
-- express js
+
+- postgreSQL    -> apt isntall postgresql -> npm i pg
+- nodejs        -> npm i nodejs
+- jdk           -> npm i jdk
+- nodemon       -> npm i nodemon
+- yarn          -> npm i yarn
+- express js    -> npm i express
+- cors          -> npm i corsn
 
 --------------------------------------------------
 --------------------------------------------------
