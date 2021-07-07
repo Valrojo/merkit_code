@@ -1,0 +1,25 @@
+---------------------------------------------------
+---------------------------------------------------
+$______Requisitos para echar a andar merkit:______$
+---------------------------------------------------
+
+
+- postgreSQL    -> apt isntall postgresql -> npm i pg
+- nodejs        -> npm i nodejs
+- jdk           -> npm i jdk
+- nodemon       -> npm i nodemon
+- yarn          -> npm i yarn
+- express js    -> npm i express
+- cors          -> npm i corsn
+
+--------------------------------------------------
+--------------------------------------------------
+$______________Para iniciar app:_________________$
+--------------------------------------------------
+
+1. iniciar server postgreSQL
+2 (solo primera vez) copiar estructura de base de datos de archivo merkit_code/server/schema.sql
+3. En la carpeta server colocar $ nodemon index
+4. En merkit_code ejecutar $ yarn install   y   $ yarn start
+
+**Si hay problema de permisos, colocar sudo antes de los comandos**
