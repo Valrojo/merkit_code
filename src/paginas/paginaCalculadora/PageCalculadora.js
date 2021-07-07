@@ -1,13 +1,38 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { VscCheck } from "react-icons/vsc";
 import { MdAttachMoney } from "react-icons/md";
+import cartasDinero from './cartasDinero';
 
 export default class PageCalculadora extends Component{
+    
     constructor(){
         super();
     }
     
+    
     render(){
+        const dinero=[
+            {
+                billete:"billete 20000",
+                moneda:"moneda 500"
+            },
+            {
+                billete:"billete 10000",
+                moneda:"moneda 100"
+            },
+            {
+                billete:"billete 5000",
+                moneda:"moneda 50"
+            },
+            {
+                billete:"billete 2000",
+                moneda:"moneda 10"
+            },
+            {
+                billete:"billete 1000",
+                moneda:"Icon Trash"
+            }]
+        
         
         return (
 
@@ -57,18 +82,73 @@ export default class PageCalculadora extends Component{
                                 {/* Texto papel moneda*/}
                                 <div className = "container" style={{flex: '1', alignItems: 'flex-end'}}> 
                                     <h3 style={{paddingLeft: '15%'}}>
-                                    Papel moneda 
+                                        Papel moneda 
                                     </h3>
+                                    <div className="container">
+                                        {
+                                            
+                                            dinero.map((elem1) => 
+                                            <div className="row">
+                                                <div className="col">
+                                                    <button type="button" class="btn btn-primary">{elem1.billete}</button>
+                                                </div>
+                                                <div className="col">
+                                                    <button type="button" class="btn btn-primary">{elem1.moneda}</button>
+                                                </div>
+                                            </div>
+                                            )
+                                            
+                                            
+                                        }
+                                        
+                                    </div>
                                 </div>
 
                 </div>
+                
 
                 {/* Placeholder para billetes resultantes */}
-                <div style = {{width: '100%', flex: '2', paddingTop: '10%',justifyContent:'center'}}>
-                    placeholder
-                </div>
+                
+                <div className = "container" style={{flex: '1', alignItems: 'flex-end'}}> 
+                    <div className = "container">
+                        <div className = "row">
+                            {
+                                dinero.map((elem)=>
+                                    <div className="col card d-grid">
+                                        <div className="card-body">
+                                            {elem.billete}
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        </div>
+                        <div className = "row">
+                            {
+                                dinero.map((elem)=>
+                                    (elem.moneda!="Icon Trash")
+                                    ?
+                                    <>
+                                        <div className="col card d-grid">
+                                            <div className="card-body">
+                                                {elem.moneda}
+                                            </div>
+                                        </div>
+                                    </>
+                                    :
+                                    <></>
+                                )
+                            }
+                        </div>
+                                        
 
-        </div>
+
+                    </div>
+
+                                    
+                </div>
+            </div>
+
+        
         )
     }
 }

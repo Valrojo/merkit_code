@@ -3,6 +3,13 @@
   "version": "0.1.1",
   "private": true,
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jdk": "0.0.0",
+    "nodejs": "0.0.0",
+    "nodemon": "^2.0.9",
+    "pg": "^8.6.0",
+    "psql": "0.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
