@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { GloboContador } from './GloboContador';
-
+import { ButtonDinero } from './ButtonDinero';
 
 export default class CartasDinero extends Component{
 
@@ -13,29 +12,23 @@ export default class CartasDinero extends Component{
 
     render ()
     {
-        const {id,billete,moneda} = this.props
+        const {billete,moneda} = this.props
         
         
         return (
             <div className="row">
 
                 <div className="col">
-                    <button type="button" className="btn btn-primary">
-                        <GloboContador 
-                            key={id}
-                            numero={2}
-                        />
-                        {billete}
-                    </button>
+                    <ButtonDinero
+                        key={`${Math.floor((Math.random()*1000000000)+1)}`}
+                        price={billete}
+                    />
                 </div>
                 <div className="col">
-                    <button type="button" className="btn btn-primary">
-                        <GloboContador 
-                            key={id}
-                            numero={2}
-                        />
-                        {moneda}
-                    </button>
+                    <ButtonDinero 
+                        key={`${Math.floor((Math.random()*1000000000)+1)}`}
+                        price={moneda}
+                    />
                 </div>
                 
             </div>

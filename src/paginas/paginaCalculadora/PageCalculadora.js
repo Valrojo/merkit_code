@@ -103,7 +103,15 @@ export default class PageCalculadora extends Component{
                 </div>
                 
 
+                <div className="container">
+                    <div className="row">
+                        <p></p>
+                    </div>
+                </div>
+                
                 {/* Placeholder para billetes resultantes */}
+
+
                 
                 <div className = "container" style={{flex: '1', alignItems: 'flex-end'}}> 
                     <div className = "container" >

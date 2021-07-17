@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { GloboContador } from './GloboContador'
 
 export default class CartasVuelto extends Component{
     
@@ -16,11 +15,11 @@ export default class CartasVuelto extends Component{
                     <div className="card-body" key={id}>
                         {moneda}
 
-                        <GloboContador
-                            key={id} 
-                            id={id}
-                            numero={3}
-                        />
+                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" 
+                            style={{color: 'white'}}
+                        >
+                            {+3}
+                        </span>
                     </div>
                 </div>
             </>
