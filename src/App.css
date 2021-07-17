@@ -21,3 +21,39 @@
   /*border-color: aquamarine;
   border-width: 5px;*/
 }
+
+.btn {
+  background-color: blue;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 7px 10px 7px 10px;
+
+  transition: color .15s ease;
+  /*
+  &:focus{
+      outline: none;
+  }
+
+  &:hover{
+      color: lighten(: #43AEE8, $amount: 15) 
+  }*/
+}
+
+.btn-edit{
+  background-color: #43AEE8;
+  border-radius: 100%;
+  transition: color .15s ease;
+  font-size: 50px;
+  border: 2px;
+  color: white;
+  /*
+  &:focus{
+      outline: none;
+  }
+
+  &:hover{
+      color: lighten($color: #997314, $amount: 15) 
+  }*/
+}

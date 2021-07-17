@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { VscCheck } from "react-icons/vsc";
-import { MdAttachMoney } from "react-icons/md";
-import cartasDinero from './cartasDinero';
+
+import CartasVuelto from './CartasVuelto';
+import CartasDinero from './CartasDinero';
 
 export default class PageCalculadora extends Component{
     
@@ -32,8 +33,7 @@ export default class PageCalculadora extends Component{
                 billete:"billete 1000",
                 moneda:"Icon Trash"
             }]
-        
-        
+       
         return (
 
 
@@ -47,10 +47,10 @@ export default class PageCalculadora extends Component{
                 </div>
 
                 {/* Texto, botones e input de monto del cliente*/}
-                <div className="TextInput" style={{display: 'flex', flexFlow: 'row', width: '100%', flex: '3', paddingTop: '2%'}}> 
-                    
+                <div className="row" style={{display: 'flex', flexFlow: 'row', width: '100%', flex: '3', paddingTop: '2%'}}> 
+                        
                                 {/* Texto ingrese monto e input monto cliente*/}
-                                <div className = "container" style={{flex: '1'}}> 
+                                <div className = "container col" style={{flex: '1'}}> 
 
                                     <div >
                                         
@@ -73,32 +73,28 @@ export default class PageCalculadora extends Component{
                                 </div>
 
                                 {/* Texto o bien */}
-                                <h5 className = "container" style={{flex: '1', alignItems: 'center'}}> 
+                                <h5 className = "container col" style={{flex: '1', alignItems: 'center'}}> 
                                     <div style={{paddingLeft: '40%', paddingTop: '2%'}}>
                                     ó bien 
                                     </div>
                                 </h5>
 
                                 {/* Texto papel moneda*/}
-                                <div className = "container" style={{flex: '1', alignItems: 'flex-end'}}> 
+                                <div className = "container col" style={{flex: '1', alignItems: 'flex-end'}}> 
                                     <h3 style={{paddingLeft: '15%'}}>
                                         Papel moneda 
                                     </h3>
                                     <div className="container">
                                         {
-                                            
                                             dinero.map((elem1) => 
-                                            <div className="row">
-                                                <div className="col">
-                                                    <button type="button" class="btn btn-primary">{elem1.billete}</button>
-                                                </div>
-                                                <div className="col">
-                                                    <button type="button" class="btn btn-primary">{elem1.moneda}</button>
-                                                </div>
-                                            </div>
+                                                
+                                                <CartasDinero
+                                                    key={`${Math.floor((Math.random()*1000000000)+1)}`}
+                                                    id={`${Math.floor((Math.random()*1000000000)+1)}`}
+                                                    billete={elem1.billete}
+                                                    moneda={elem1.moneda}
+                                                />
                                             )
-                                            
-                                            
                                         }
                                         
                                     </div>
@@ -110,41 +106,43 @@ export default class PageCalculadora extends Component{
                 {/* Placeholder para billetes resultantes */}
                 
                 <div className = "container" style={{flex: '1', alignItems: 'flex-end'}}> 
-                    <div className = "container">
-                        <div className = "row">
+                    <div className = "container" >
+                        <div className = "row" key='A'>
                             {
-                                dinero.map((elem)=>
-                                    <div className="col card d-grid">
-                                        <div className="card-body">
-                                            {elem.billete}
-                                        </div>
-                                    </div>
+                                dinero.map((elem1)=>
+                                    
+                                    <CartasVuelto
+                                        key={`${Math.floor((Math.random()*1000000000)+1)}`}
+                                        id={`${Math.floor((Math.random()*1000000000)+1)}`}
+                                        moneda={elem1.billete}
+                                    />
+                                
                                 )
                             }
                         </div>
-                        <div className = "row">
+                    </div>
+                    <div className= "container">
+                        <div className = "row" key='B'>
                             {
-                                dinero.map((elem)=>
-                                    (elem.moneda!="Icon Trash")
+                                dinero.map((elem2)=>
+                                    (elem2.moneda!="Icon Trash")
                                     ?
-                                    <>
-                                        <div className="col card d-grid">
-                                            <div className="card-body">
-                                                {elem.moneda}
-                                            </div>
-                                        </div>
-                                    </>
+                                        <CartasVuelto
+                                            key={`${Math.floor((Math.random()*1000000000)+1)}`}
+                                            id={`${Math.floor((Math.random()*1000000000)+1)}`}
+                                            moneda={elem2.moneda}
+                                        />
                                     :
                                     <></>
                                 )
                             }
                         </div>
-                                        
-
-
                     </div>
-
-                                    
+                </div>
+                <div className="container">
+                    <div className="row">
+                        <p></p>
+                    </div>
                 </div>
             </div>
 
