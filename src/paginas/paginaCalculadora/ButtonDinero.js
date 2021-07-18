@@ -32,7 +32,7 @@ export const ButtonDinero = ({id,print,tipo,valor}) => {
         }else{
             for(const iv of btn){
                 if(iv.tipo!= "Trash"){
-                    dispatch(resetButton({
+                    dispatch(resetButton({  
                         id:iv.id,
                         print:0,
                         tipo:iv.tipo,
