@@ -12,7 +12,7 @@ export const CartasD = () => {
                 <>
                     {   
                         btn.map( (em) => 
-                        (em.tipo == "billete")
+                        (em.tipo == "billete" || em.tipo == "moneda")
                         ?
                             <div className="col">
                                 <ButtonDinero
@@ -24,15 +24,7 @@ export const CartasD = () => {
                                 />
                             </div>
                         :
-                        <></>
-                        )
-                    }
-                </>
-                <>
-                    {   
-                        btn.map( (em) => 
-                        (em.tipo == "moneda")
-                        ?
+                        <>
                             <div className="col">
                                 <ButtonDinero
                                     key={em.id}
@@ -42,10 +34,11 @@ export const CartasD = () => {
                                     valor={em.valor}
                                 />
                             </div>
-                        :<></>
+                        </>
                         )
                     }
                 </>
+               
             </div>
         </>
     )

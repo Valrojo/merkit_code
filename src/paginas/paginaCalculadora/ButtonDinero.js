@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { sumaButton } from '../../actions/botones';
+import { resetButton, sumaButton } from '../../actions/botones';
 
 
 export const ButtonDinero = ({id,print,tipo,valor}) => {
@@ -8,13 +8,19 @@ export const ButtonDinero = ({id,print,tipo,valor}) => {
     //const contador = 0;    
     const dispatch = useDispatch()
 
+    const btn = useSelector(state => state.btn)
     
     const [cnt, setCnt] = useState(1)
+
+    useEffect(() => {
+        if(btn[0].print==0){
+            setCnt(1)
+        }
+    }, [btn])
     
     const handleBtn = () => {
         if(tipo!="Trash"){
             setCnt(cnt+1)
-            console.log("numero: "+cnt);
             dispatch(sumaButton({
                 id:id,
                 print:cnt,
@@ -23,7 +29,20 @@ export const ButtonDinero = ({id,print,tipo,valor}) => {
             }
 
             ))
+        }else{
+            for(const iv of btn){
+                if(iv.tipo!= "Trash"){
+                    dispatch(resetButton({
+                        id:iv.id,
+                        print:0,
+                        tipo:iv.tipo,
+                        valor:iv.valor
+                        }
+                    ))
+                }
+            }
         }
+
     }
 
     return (

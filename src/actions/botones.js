@@ -10,6 +10,7 @@ export const sumaButton = (suma) => ({
     payload: suma
 })
 
-export const resetButton = () => ({
-    type: types.resetButton
+export const resetButton = (rst) => ({
+    type: types.resetButton,
+    payload: rst
 })

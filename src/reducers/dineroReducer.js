@@ -74,7 +74,10 @@ export const dineroReducer = (state = initstate, action) =>{
                 :{...prg} );
 
         case types.resetButton:
-            return state=[];
+            return state.map( prg => 
+                (prg.id === action.payload.id)
+                ? {...prg, print: 0 }
+                :{...prg} )
 
         default:
             return state;
