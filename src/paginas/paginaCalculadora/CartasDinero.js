@@ -1,34 +1,50 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { useSelector } from 'react-redux';
 import { ButtonDinero } from './ButtonDinero';
 
 export default class CartasDinero extends Component{
 
-//export const cartasDinero = ({billete, moneda}) => {
-    constructor(billete, moneda){
-        super();
-        this.billete = billete
-        this.moneda = moneda
+    constructor(){
+        this.super()
     }
 
-    render ()
-    {
-        const {billete,moneda} = this.props
-        
+    render (){
+
+        const btn = useSelector(state => state.btn);
         
         return (
             <div className="row">
-
+                {   
+                    btn.map( (em) => 
+                    (em.tipo == "billete")
+                    &
+                        <div className="col">
+                            <ButtonDinero
+                                key={em.id}
+                                id={em.id}
+                                print={em.print}
+                                tipo={em.tipo}
+                                valor={em.valor}
+                            />
+                        </div>
+                    )
+                }
                 <div className="col">
-                    <ButtonDinero
-                        key={`${Math.floor((Math.random()*1000000000)+1)}`}
-                        price={billete}
-                    />
-                </div>
-                <div className="col">
-                    <ButtonDinero 
-                        key={`${Math.floor((Math.random()*1000000000)+1)}`}
-                        price={moneda}
-                    />
+                {   
+                    btn.map( (em) => 
+                    (em.tipo == "moneda")
+                    &
+                        <div className="col">
+                            <ButtonDinero
+                                key={em.id}
+                                id={em.id}
+                                print={em.print}
+                                tipo={em.tipo}
+                                valor={em.valor}
+                            />
+                        </div>
+                    )
+                }
                 </div>
                 
             </div>

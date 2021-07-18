@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { VscCheck } from "react-icons/vsc";
-
 import CartasVuelto from './CartasVuelto';
 import CartasDinero from './CartasDinero';
+import { CartasD } from './CartasD';
 
 export default class PageCalculadora extends Component{
     
@@ -61,6 +61,9 @@ export default class PageCalculadora extends Component{
                 billete:"billete 1000",
                 moneda:"Icon Trash"
             }]
+
+            
+        
        
         return (
 
@@ -92,7 +95,7 @@ export default class PageCalculadora extends Component{
                                         <div className="input-group input-group-lg" style={{width: '100%', paddingTop: '2%'}}>
                                             <span className="input-group-text input-group-text-light" style={{backgroundColor: '#edf5f0', width: '33px'}}>$</span>
                                             <input type="text" className="form-control" id="montoCliente" aria-describedby="inputGroup-sizing-lg" placeholder="Ingrese monto recibido" onChange={this.handleMontoCliente}/>
-                                            <button className="btn btn-info" type="button" id="confirmarCliente" onClick = {this.montoCliente += 8}><VscCheck/></button>
+                                            {/*<button className="btn btn-info" type="button" id="confirmarCliente" onClick = {this.montoCliente += 8}><VscCheck/></button>*/}
                                         </div>
 
                                         {/* Bloque con el resultado del valor del vuelto */}
@@ -117,19 +120,9 @@ export default class PageCalculadora extends Component{
                                         Papel moneda 
                                     </h3>
                                     <div className="container">
-                                        {
-                                            dinero.map((elem1) => 
-                                                
-                                                <CartasDinero
-                                                    key={`${Math.floor((Math.random()*1000000000)+1)}`}
-                                                    id={`${Math.floor((Math.random()*1000000000)+1)}`}
-                                                    billete={elem1.billete}
-                                                    moneda={elem1.moneda}
-                                                />
-
-                                            )
-                                        }
-                                        
+                                        <CartasD
+                                            key={`${Math.floor((Math.random()*1000000000)+1)}`}
+                                        />
                                     </div>
                                 </div>
 
@@ -173,11 +166,13 @@ export default class PageCalculadora extends Component{
                         </div>
                     </div>
                 </div>
+
                 <div className="container">
                     <div className="row">
                         <p></p>
                     </div>
                 </div>
+                
             </div>
 
         

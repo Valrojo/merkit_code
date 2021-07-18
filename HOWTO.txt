@@ -11,6 +11,8 @@ $______Requisitos para echar a andar merkit:______$
 - yarn          -> npm i yarn
 - express js    -> npm i express
 - cors          -> npm i corsn
+- thunk         -> npm install redux-thunk 
+- redux         -> npm install react-redux redux
 
 --------------------------------------------------
 --------------------------------------------------
