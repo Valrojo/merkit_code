@@ -40,10 +40,12 @@ export default class PageCalculadora extends Component{
     }
 
     handleChangeTotal(value){
-        this.setState({montoTotal: value})
+        this.setState({montoTotal: value});
+        document.getElementById("montoTotal").value = value;
     }
     handleChangeCliente(value){
-        this.setState({montoCliente: value})
+        this.setState({montoCliente: value});
+        document.getElementById("montoCliente").value = value;
     }
 
     /* Función donde se calcula el valor del vuelto */
