@@ -41,7 +41,6 @@ export default class ProductosVenta extends Component {
             }
 
             else{                
-                console.log("no hay nada")
                 return(
                     <div className = 'productosVenta'  >
 

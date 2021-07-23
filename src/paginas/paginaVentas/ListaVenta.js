@@ -13,7 +13,6 @@ export default class ListaVenta extends Component {
             for (var i = 0; i < 3; i++){
                 this.props.listaVenta.push(new ComponenteVenta())
             }
-            console.log(this.props)
         }
 
         //Crea ventas a base de datos

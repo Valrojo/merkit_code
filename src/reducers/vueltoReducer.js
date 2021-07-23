@@ -52,30 +52,25 @@ const initstate=[
         print:0,
         tipo:"moneda",
         valor: 10
-    },{
-        id:Math.floor((Math.random()*1000000000)+1),
-        print:0,
-        tipo:"Trash",
-        valor: 0
     }
 ]
 
 
-export const dineroReducer = (state = initstate, action) =>{
+export const vueltoReducer = (state = initstate, action) =>{
     switch (action.type){
 
-        case types.addButton:
+        case types.addVuelto:
             return [...state, action.payload]
         
-        case types.sumaButton:
+        case types.sumaVuelto:
             return state.map( prg => 
-                (prg.id === action.payload.id)
-                ? {...prg, print: action.payload.print }
+                (prg.valor === action.payload.valor)
+                ? {...prg, print: prg.print + 1 }
                 :{...prg} );
 
-        case types.resetButton:
+        case types.resetVuelto:
             return state.map( prg => 
-                (prg.id === action.payload.id)
+                (prg.valor === action.payload.valor)
                 ? {...prg, print: 0 }
                 :{...prg} )
 

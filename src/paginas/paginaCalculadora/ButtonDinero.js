@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { resetButton, sumaButton } from '../../actions/botones';
+import { CalcuContext } from '../../context/CalcuContext';
 
 
 export const ButtonDinero = ({id,print,tipo,valor}) => {
 
     //const contador = 0;    
     const dispatch = useDispatch()
+
+    const {montoCliente,
+        handleChangeCliente} = useContext(CalcuContext)
 
     const btn = useSelector(state => state.btn)
     
@@ -22,13 +26,13 @@ export const ButtonDinero = ({id,print,tipo,valor}) => {
         if(tipo!="Trash"){
             setCnt(cnt+1)
             dispatch(sumaButton({
-                id:id,
-                print:cnt,
-                tipo:tipo,
-                valor: valor
-            }
-
-            ))
+                    id:id,
+                    print:cnt,
+                    tipo:tipo,
+                    valor: valor
+                })
+            )
+            handleChangeCliente(montoCliente+valor);
         }else{
             for(const iv of btn){
                 if(iv.tipo!= "Trash"){
@@ -41,6 +45,8 @@ export const ButtonDinero = ({id,print,tipo,valor}) => {
                     ))
                 }
             }
+            //limpia campo montoCliente
+            handleChangeCliente(0);
         }
 
     }
